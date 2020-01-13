@@ -14,61 +14,63 @@
  * =========================================================
  */
 
-public void Antalbilletter(GDropList source, GEvent event) { //_CODE_:Billetter:237351:
+public void billetter_dropList_click(GDropList source, GEvent event) { //_CODE_:billetter_dropList:237351:
   println("Billetter - GDropList >> GEvent." + event + " @ " + millis());
-} //_CODE_:Billetter:237351:
+} //_CODE_:billetter_dropList:237351:
 
-public void button1_click1(GButton source, GEvent event) { //_CODE_:Reserver:502515:
+public void reserver_button_click(GButton source, GEvent event) { //_CODE_:reserver_button:502515:
   println("Reserver - GButton >> GEvent." + event + " @ " + millis());
-} //_CODE_:Reserver:502515:
+  logind_window.setVisible(true);
+} //_CODE_:reserver_button:502515:
 
-public void dropList2_click1(GDropList source, GEvent event) { //_CODE_:film:361568:
+public void film_dropList_click(GDropList source, GEvent event) { //_CODE_:film_dropList:361568:
   println("film - GDropList >> GEvent." + event + " @ " + millis());
-} //_CODE_:film:361568:
+} //_CODE_:film_dropList:361568:
 
-public void button1_click3(GButton source, GEvent event) { //_CODE_:button1:806271:
+public void afbestil_button_click(GButton source, GEvent event) { //_CODE_:afbestil_button:806271:
   println("button1 - GButton >> GEvent." + event + " @ " + millis());
-} //_CODE_:button1:806271:
+  afbestil_window.setVisible(true);
+} //_CODE_:afbestil_button:806271:
 
-synchronized public void win_draw1(PApplet appc, GWinData data) { //_CODE_:window_afbestil:889572:
-  appc.background(230);
-} //_CODE_:window_afbestil:889572:
+synchronized public void win_draw2(PApplet appc, GWinData data) { //_CODE_:afbestil_window:889572:
+  appc.background(20, 29, 38);
+} //_CODE_:afbestil_window:889572:
 
-public void button4_click2(GButton source, GEvent event) { //_CODE_:button4:901157:
+public void afbestil_final_button_click(GButton source, GEvent event) { //_CODE_:afbetil_final_button:901157:
   println("button1 - GButton >> GEvent." + event + " @ " + millis());
-} //_CODE_:button4:901157:
+} //_CODE_:afbetil_final_button:901157:
 
-public void textfield1_change1(GTextField source, GEvent event) { //_CODE_:textfield1:462433:
+public void tlf_afbestil_textfield_change(GTextField source, GEvent event) { //_CODE_:tlf_afbestil_textfield:462433:
   println("textfield1 - GTextField >> GEvent." + event + " @ " + millis());
-} //_CODE_:textfield1:462433:
+} //_CODE_:tlf_afbestil_textfield:462433:
 
-public void textfield2_change1(GTextField source, GEvent event) { //_CODE_:textfield2:726572:
+public void adg_afbestil_textfield_change(GTextField source, GEvent event) { //_CODE_:adg_afbestil_textfield:726572:
   println("textfield2 - GTextField >> GEvent." + event + " @ " + millis());
-} //_CODE_:textfield2:726572:
+} //_CODE_:adg_afbestil_textfield:726572:
 
-synchronized public void win_draw2(PApplet appc, GWinData data) { //_CODE_:window1:857078:
-  appc.background(230);
-} //_CODE_:window1:857078:
+synchronized public void win_draw1(PApplet appc, GWinData data) { //_CODE_:logind_window:857078:
+  appc.background(20, 29, 38);
+} //_CODE_:logind_window:857078:
 
-public void textfield3_change1(GTextField source, GEvent event) { //_CODE_:textfield3:973997:
+public void tlf_logind_textfield_change(GTextField source, GEvent event) { //_CODE_:tlf_logind_textfield:973997:
   println("textfield3 - GTextField >> GEvent." + event + " @ " + millis());
-} //_CODE_:textfield3:973997:
+} //_CODE_:tlf_logind_textfield:973997:
 
-public void textfield4_change1(GTextField source, GEvent event) { //_CODE_:textfield4:620999:
+public void adg_logind_textfield_change(GTextField source, GEvent event) { //_CODE_:adg_logind_textfield:620999:
   println("textfield4 - GTextField >> GEvent." + event + " @ " + millis());
-} //_CODE_:textfield4:620999:
+} //_CODE_:adg_logind_textfield:620999:
 
-public void button2_click1(GButton source, GEvent event) { //_CODE_:button2:361476:
+public void nybruger_button_click(GButton source, GEvent event) { //_CODE_:nybruger_button:361476:
   println("button2 - GButton >> GEvent." + event + " @ " + millis());
-} //_CODE_:button2:361476:
+} //_CODE_:nybruger_button:361476:
 
-public void button3_click1(GButton source, GEvent event) { //_CODE_:button3:364978:
+public void logind_button_click(GButton source, GEvent event) { //_CODE_:logind_button:364978:
   println("button3 - GButton >> GEvent." + event + " @ " + millis());
-} //_CODE_:button3:364978:
+} //_CODE_:logind_button:364978:
 
-synchronized public void win_draw7(PApplet appc, GWinData data) { //_CODE_:window2:682301:
-  appc.background(230);
-} //_CODE_:window2:682301:
+synchronized public void win_draw3(PApplet appc, GWinData data) { //_CODE_:nyprofil_window:682301:
+  appc.background(20, 29, 38);
+} //_CODE_:nyprofil_window:682301:
 
 
 
@@ -78,82 +80,89 @@ public void createGUI(){
   G4P.messagesEnabled(false);
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setMouseOverEnabled(false);
-  surface.setTitle("Yeet");
-  Billetter = new GDropList(this, 40, 90, 190, 300, 5, 10);
-  Billetter.setItems(loadStrings("list_237351"), 0);
-  Billetter.addEventHandler(this, "Antalbilletter");
-  Reserver = new GButton(this, 40, 620, 190, 50);
-  Reserver.setText("Reserver");
-  Reserver.addEventHandler(this, "button1_click1");
-  film = new GDropList(this, 40, 10, 190, 200, 3, 10);
-  film.setItems(loadStrings("list_361568"), 0);
-  film.addEventHandler(this, "dropList2_click1");
-  button1 = new GButton(this, 1050, 620, 190, 50);
-  button1.setText("Afbestil");
-  button1.addEventHandler(this, "button1_click3");
-  label1 = new GLabel(this, 1050, 590, 190, 20);
-  label1.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label1.setText("My label");
-  label1.setOpaque(false);
-  window_afbestil = GWindow.getWindow(this, "Afbestil billetter", 0, 0, 500, 500, JAVA2D);
-  window_afbestil.noLoop();
-  window_afbestil.setActionOnClose(G4P.CLOSE_WINDOW);
-  window_afbestil.addDrawHandler(this, "win_draw1");
-  button4 = new GButton(window_afbestil, 170, 270, 170, 50);
-  button4.setText("Afbestil billetter");
-  button4.addEventHandler(this, "button4_click2");
-  textfield1 = new GTextField(window_afbestil, 160, 100, 190, 40, G4P.SCROLLBARS_NONE);
-  textfield1.setPromptText("Telefon nr.");
-  textfield1.setOpaque(true);
-  textfield1.addEventHandler(this, "textfield1_change1");
-  textfield2 = new GTextField(window_afbestil, 160, 180, 190, 40, G4P.SCROLLBARS_NONE);
-  textfield2.setPromptText("Adgangskode");
-  textfield2.setOpaque(true);
-  textfield2.addEventHandler(this, "textfield2_change1");
-  window1 = GWindow.getWindow(this, "Window title", 0, 0, 500, 500, JAVA2D);
-  window1.noLoop();
-  window1.setActionOnClose(G4P.CLOSE_WINDOW);
-  window1.addDrawHandler(this, "win_draw2");
-  textfield3 = new GTextField(window1, 140, 120, 210, 50, G4P.SCROLLBARS_NONE);
-  textfield3.setOpaque(true);
-  textfield3.addEventHandler(this, "textfield3_change1");
-  textfield4 = new GTextField(window1, 140, 200, 210, 50, G4P.SCROLLBARS_NONE);
-  textfield4.setOpaque(true);
-  textfield4.addEventHandler(this, "textfield4_change1");
-  button2 = new GButton(window1, 200, 390, 90, 30);
-  button2.setText("Face text");
-  button2.addEventHandler(this, "button2_click1");
-  button3 = new GButton(window1, 140, 290, 210, 30);
-  button3.setText("Face text");
-  button3.addEventHandler(this, "button3_click1");
-  label2 = new GLabel(window1, 140, 360, 210, 30);
-  label2.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label2.setText("My label");
-  label2.setOpaque(false);
-  window2 = GWindow.getWindow(this, "Window title", 0, 0, 500, 500, JAVA2D);
-  window2.noLoop();
-  window2.setActionOnClose(G4P.CLOSE_WINDOW);
-  window2.addDrawHandler(this, "win_draw7");
-  window_afbestil.loop();
-  window1.loop();
-  window2.loop();
+  surface.setTitle("Biograf oversigt");
+  billetter_dropList = new GDropList(this, 40, 90, 190, 300, 5, 30);
+  billetter_dropList.setItems(loadStrings("list_237351"), 0);
+  billetter_dropList.setLocalColorScheme(GCScheme.SCHEME_8);
+  billetter_dropList.addEventHandler(this, "billetter_dropList_click");
+  reserver_button = new GButton(this, 40, 620, 190, 50);
+  reserver_button.setText("Reserver");
+  reserver_button.setLocalColorScheme(GCScheme.SCHEME_8);
+  reserver_button.addEventHandler(this, "reserver_button_click");
+  film_dropList = new GDropList(this, 40, 10, 190, 200, 3, 30);
+  film_dropList.setItems(loadStrings("list_361568"), 0);
+  film_dropList.setLocalColorScheme(GCScheme.SCHEME_8);
+  film_dropList.addEventHandler(this, "film_dropList_click");
+  afbestil_button = new GButton(this, 1050, 620, 190, 50);
+  afbestil_button.setText("Afbestil");
+  afbestil_button.setLocalColorScheme(GCScheme.SCHEME_8);
+  afbestil_button.addEventHandler(this, "afbestil_button_click");
+  afbestil_label = new GLabel(this, 1030, 590, 230, 30);
+  afbestil_label.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  afbestil_label.setText("Har du billetter der skal afbestilles?");
+  afbestil_label.setLocalColorScheme(GCScheme.SCHEME_10);
+  afbestil_label.setOpaque(false);
+  afbestil_window = GWindow.getWindow(this, "Afbestil billetter", 0, 0, 500, 500, JAVA2D);
+  afbestil_window.noLoop();
+  afbestil_window.setActionOnClose(G4P.KEEP_OPEN);
+  afbestil_window.addDrawHandler(this, "win_draw2");
+  afbetil_final_button = new GButton(afbestil_window, 170, 270, 170, 50);
+  afbetil_final_button.setText("Afbestil billetter");
+  afbetil_final_button.addEventHandler(this, "afbestil_final_button_click");
+  tlf_afbestil_textfield = new GTextField(afbestil_window, 160, 100, 190, 40, G4P.SCROLLBARS_NONE);
+  tlf_afbestil_textfield.setPromptText("Telefon nr.");
+  tlf_afbestil_textfield.setOpaque(true);
+  tlf_afbestil_textfield.addEventHandler(this, "tlf_afbestil_textfield_change");
+  adg_afbestil_textfield = new GTextField(afbestil_window, 160, 180, 190, 40, G4P.SCROLLBARS_NONE);
+  adg_afbestil_textfield.setPromptText("Adgangskode");
+  adg_afbestil_textfield.setOpaque(true);
+  adg_afbestil_textfield.addEventHandler(this, "adg_afbestil_textfield_change");
+  logind_window = GWindow.getWindow(this, "Window title", 0, 0, 500, 500, JAVA2D);
+  logind_window.noLoop();
+  logind_window.setActionOnClose(G4P.KEEP_OPEN);
+  logind_window.addDrawHandler(this, "win_draw1");
+  tlf_logind_textfield = new GTextField(logind_window, 140, 120, 210, 50, G4P.SCROLLBARS_NONE);
+  tlf_logind_textfield.setPromptText("Telefon nr.");
+  tlf_logind_textfield.setOpaque(true);
+  tlf_logind_textfield.addEventHandler(this, "tlf_logind_textfield_change");
+  adg_logind_textfield = new GTextField(logind_window, 140, 200, 210, 50, G4P.SCROLLBARS_NONE);
+  adg_logind_textfield.setPromptText("Adgangskode");
+  adg_logind_textfield.setOpaque(true);
+  adg_logind_textfield.addEventHandler(this, "adg_logind_textfield_change");
+  nybruger_button = new GButton(logind_window, 200, 390, 90, 30);
+  nybruger_button.setText("Lav ny profil");
+  nybruger_button.addEventHandler(this, "nybruger_button_click");
+  logind_button = new GButton(logind_window, 140, 290, 210, 30);
+  logind_button.setText("Log ind");
+  logind_button.addEventHandler(this, "logind_button_click");
+  nybruger_label = new GLabel(logind_window, 140, 360, 210, 30);
+  nybruger_label.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  nybruger_label.setText("Har du ikke en bruger");
+  nybruger_label.setOpaque(false);
+  nyprofil_window = GWindow.getWindow(this, "Window title", 0, 0, 500, 500, JAVA2D);
+  nyprofil_window.noLoop();
+  nyprofil_window.setActionOnClose(G4P.KEEP_OPEN);
+  nyprofil_window.addDrawHandler(this, "win_draw3");
+  afbestil_window.loop();
+  logind_window.loop();
+  nyprofil_window.loop();
 }
 
 // Variable declarations 
 // autogenerated do not edit
-GDropList Billetter; 
-GButton Reserver; 
-GDropList film; 
-GButton button1; 
-GLabel label1; 
-GWindow window_afbestil;
-GButton button4; 
-GTextField textfield1; 
-GTextField textfield2; 
-GWindow window1;
-GTextField textfield3; 
-GTextField textfield4; 
-GButton button2; 
-GButton button3; 
-GLabel label2; 
-GWindow window2;
+GDropList billetter_dropList; 
+GButton reserver_button; 
+GDropList film_dropList; 
+GButton afbestil_button; 
+GLabel afbestil_label; 
+GWindow afbestil_window;
+GButton afbetil_final_button; 
+GTextField tlf_afbestil_textfield; 
+GTextField adg_afbestil_textfield; 
+GWindow logind_window;
+GTextField tlf_logind_textfield; 
+GTextField adg_logind_textfield; 
+GButton nybruger_button; 
+GButton logind_button; 
+GLabel nybruger_label; 
+GWindow nyprofil_window;

@@ -1,8 +1,5 @@
-// Need G4P library
 import g4p_controls.*;
-// You can remove the PeasyCam import if you are not using
-// the GViewPeasyCam control or the PeasyCam library.
-import peasy.*;
+import java.awt.*;
 
 
 public void setup(){
@@ -14,12 +11,19 @@ public void setup(){
 }
 
 public void draw(){
-  background(230);
-  
+  background(20, 29, 38);
 }
 
 // Use this method to add additional statements
 // to customise the GUI controls
 public void customGUI(){
-
+  logind_window.setLocation(710, 290);
+  afbestil_window.setLocation(710, 290);
+  nyprofil_window.setLocation(710, 290);
+  
+  logind_window.setVisible(false);
+  afbestil_window.setVisible(false);
+  nyprofil_window.setVisible(false);
+  
+  
 }
