@@ -7,16 +7,16 @@ public void setup() {
   createGUI();
   customGUI();
   // Place your setup code here
+  stroke(255);
   rectMode(CENTER);
-  textAlign(CENTER, TOP);
-  textSize(35);
-  test = new Hall(12, 10);
+  test = new Hall(10, 8);
   test.createSeats();
 }
 
 public void draw() {
   background(20, 29, 38);
-  test.display();
+  line(280, 0, 280, height);
+  line(1000, 0, 1000, height);
 }
 
 // Use this method to add additional statements

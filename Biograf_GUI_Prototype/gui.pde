@@ -103,7 +103,7 @@ public void createGUI(){
   afbestil_button.setLocalColorScheme(GCScheme.SCHEME_8);
   afbestil_button.addEventHandler(this, "afbestil_button_click");
   afbestil_label = new GLabel(this, 1000, 540, 280, 70);
-  afbestil_label.setTextAlign(GAlign.CENTER, GAlign.TOP);
+  afbestil_label.setTextAlign(GAlign.CENTER, GAlign.BOTTOM);
   afbestil_label.setText("Har du billetter der skal afbestilles?");
   afbestil_label.setLocalColorScheme(GCScheme.SCHEME_10);
   afbestil_label.setOpaque(false);
@@ -157,12 +157,12 @@ public void createGUI(){
   nybruger_window.setActionOnClose(G4P.KEEP_OPEN);
   nybruger_window.addDrawHandler(this, "win_draw3");
   tlf_nybruger_textfield = new GTextField(nybruger_window, 140, 100, 210, 50, G4P.SCROLLBARS_NONE);
-  tlf_nybruger_textfield.setPromptText("Telefon nr.");
+  tlf_nybruger_textfield.setPromptText("Nyt telefon nr.");
   tlf_nybruger_textfield.setLocalColorScheme(GCScheme.SCHEME_8);
   tlf_nybruger_textfield.setOpaque(true);
   tlf_nybruger_textfield.addEventHandler(this, "tlf_nybruger_textfield_change");
   adg1_nybruger_textfield = new GTextField(nybruger_window, 140, 190, 210, 50, G4P.SCROLLBARS_NONE);
-  adg1_nybruger_textfield.setPromptText("Adgangskode");
+  adg1_nybruger_textfield.setPromptText("Ny adgangskode");
   adg1_nybruger_textfield.setLocalColorScheme(GCScheme.SCHEME_8);
   adg1_nybruger_textfield.setOpaque(true);
   adg1_nybruger_textfield.addEventHandler(this, "adg1_nybruger_textfield_change");
