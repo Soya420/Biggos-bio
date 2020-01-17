@@ -15,62 +15,67 @@
  */
 
 public void billetter_dropList_click(GDropList source, GEvent event) { //_CODE_:billetter_dropList:237351:
-  println("Billetter - GDropList >> GEvent." + event + " @ " + millis());
 } //_CODE_:billetter_dropList:237351:
 
 public void reserver_button_click(GButton source, GEvent event) { //_CODE_:reserver_button:502515:
-  println("Reserver - GButton >> GEvent." + event + " @ " + millis());
   logind_window.setVisible(true);
 } //_CODE_:reserver_button:502515:
 
 public void film_dropList_click(GDropList source, GEvent event) { //_CODE_:film_dropList:361568:
-  println("film - GDropList >> GEvent." + event + " @ " + millis());
 } //_CODE_:film_dropList:361568:
 
 public void afbestil_button_click(GButton source, GEvent event) { //_CODE_:afbestil_button:806271:
-  println("button1 - GButton >> GEvent." + event + " @ " + millis());
   afbestil_window.setVisible(true);
 } //_CODE_:afbestil_button:806271:
 
 synchronized public void win_draw2(PApplet appc, GWinData data) { //_CODE_:afbestil_window:889572:
-  appc.background(20, 29, 38);
+  appc.background(78, 80, 87);
 } //_CODE_:afbestil_window:889572:
 
 public void afbestil_final_button_click(GButton source, GEvent event) { //_CODE_:afbetil_final_button:901157:
-  println("button1 - GButton >> GEvent." + event + " @ " + millis());
+  afbestil_window.setVisible(false);
 } //_CODE_:afbetil_final_button:901157:
 
 public void tlf_afbestil_textfield_change(GTextField source, GEvent event) { //_CODE_:tlf_afbestil_textfield:462433:
-  println("textfield1 - GTextField >> GEvent." + event + " @ " + millis());
 } //_CODE_:tlf_afbestil_textfield:462433:
 
 public void adg_afbestil_textfield_change(GTextField source, GEvent event) { //_CODE_:adg_afbestil_textfield:726572:
-  println("textfield2 - GTextField >> GEvent." + event + " @ " + millis());
 } //_CODE_:adg_afbestil_textfield:726572:
 
 synchronized public void win_draw1(PApplet appc, GWinData data) { //_CODE_:logind_window:857078:
-  appc.background(20, 29, 38);
+  appc.background(78, 80, 87);
 } //_CODE_:logind_window:857078:
 
 public void tlf_logind_textfield_change(GTextField source, GEvent event) { //_CODE_:tlf_logind_textfield:973997:
-  println("textfield3 - GTextField >> GEvent." + event + " @ " + millis());
 } //_CODE_:tlf_logind_textfield:973997:
 
 public void adg_logind_textfield_change(GTextField source, GEvent event) { //_CODE_:adg_logind_textfield:620999:
-  println("textfield4 - GTextField >> GEvent." + event + " @ " + millis());
 } //_CODE_:adg_logind_textfield:620999:
 
 public void nybruger_button_click(GButton source, GEvent event) { //_CODE_:nybruger_button:361476:
-  println("button2 - GButton >> GEvent." + event + " @ " + millis());
+  nybruger_window.setVisible(true);
 } //_CODE_:nybruger_button:361476:
 
 public void logind_button_click(GButton source, GEvent event) { //_CODE_:logind_button:364978:
-  println("button3 - GButton >> GEvent." + event + " @ " + millis());
+  logind_window.setVisible(false);
 } //_CODE_:logind_button:364978:
 
-synchronized public void win_draw3(PApplet appc, GWinData data) { //_CODE_:nyprofil_window:682301:
-  appc.background(20, 29, 38);
-} //_CODE_:nyprofil_window:682301:
+synchronized public void win_draw3(PApplet appc, GWinData data) { //_CODE_:nybruger_window:682301:
+  appc.background(78, 80, 87);
+} //_CODE_:nybruger_window:682301:
+
+public void tlf_nybruger_textfield_change(GTextField source, GEvent event) { //_CODE_:tlf_nybruger_textfield:926153:
+} //_CODE_:tlf_nybruger_textfield:926153:
+
+public void adg1_nybruger_textfield_change(GTextField source, GEvent event) { //_CODE_:adg1_nybruger_textfield:444830:
+} //_CODE_:adg1_nybruger_textfield:444830:
+
+public void adg2_nybruger_textfield_change(GTextField source, GEvent event) { //_CODE_:adg2_nybruger_textfield:456173:
+} //_CODE_:adg2_nybruger_textfield:456173:
+
+public void nybruger_final_button_click(GButton source, GEvent event) { //_CODE_:nybruger_final_button:967169:
+  nybruger_window.setVisible(false);
+} //_CODE_:nybruger_final_button:967169:
 
 
 
@@ -106,36 +111,36 @@ public void createGUI(){
   afbestil_window.noLoop();
   afbestil_window.setActionOnClose(G4P.KEEP_OPEN);
   afbestil_window.addDrawHandler(this, "win_draw2");
-  afbetil_final_button = new GButton(afbestil_window, 170, 270, 170, 50);
+  afbetil_final_button = new GButton(afbestil_window, 160, 290, 170, 50);
   afbetil_final_button.setText("Afbestil billetter");
   afbetil_final_button.setLocalColorScheme(GCScheme.SCHEME_8);
   afbetil_final_button.addEventHandler(this, "afbestil_final_button_click");
-  tlf_afbestil_textfield = new GTextField(afbestil_window, 160, 100, 190, 40, G4P.SCROLLBARS_NONE);
+  tlf_afbestil_textfield = new GTextField(afbestil_window, 140, 100, 210, 50, G4P.SCROLLBARS_NONE);
   tlf_afbestil_textfield.setPromptText("Telefon nr.");
   tlf_afbestil_textfield.setLocalColorScheme(GCScheme.SCHEME_8);
   tlf_afbestil_textfield.setOpaque(true);
   tlf_afbestil_textfield.addEventHandler(this, "tlf_afbestil_textfield_change");
-  adg_afbestil_textfield = new GTextField(afbestil_window, 160, 180, 190, 40, G4P.SCROLLBARS_NONE);
+  adg_afbestil_textfield = new GTextField(afbestil_window, 140, 190, 210, 50, G4P.SCROLLBARS_NONE);
   adg_afbestil_textfield.setPromptText("Adgangskode");
   adg_afbestil_textfield.setLocalColorScheme(GCScheme.SCHEME_8);
   adg_afbestil_textfield.setOpaque(true);
   adg_afbestil_textfield.addEventHandler(this, "adg_afbestil_textfield_change");
-  logind_window = GWindow.getWindow(this, "Window title", 0, 0, 500, 500, JAVA2D);
+  logind_window = GWindow.getWindow(this, "Log ind", 0, 0, 500, 500, JAVA2D);
   logind_window.noLoop();
   logind_window.setActionOnClose(G4P.KEEP_OPEN);
   logind_window.addDrawHandler(this, "win_draw1");
-  tlf_logind_textfield = new GTextField(logind_window, 140, 120, 210, 50, G4P.SCROLLBARS_NONE);
+  tlf_logind_textfield = new GTextField(logind_window, 140, 100, 210, 50, G4P.SCROLLBARS_NONE);
   tlf_logind_textfield.setPromptText("Telefon nr.");
   tlf_logind_textfield.setLocalColorScheme(GCScheme.SCHEME_8);
   tlf_logind_textfield.setOpaque(true);
   tlf_logind_textfield.addEventHandler(this, "tlf_logind_textfield_change");
-  adg_logind_textfield = new GTextField(logind_window, 140, 200, 210, 50, G4P.SCROLLBARS_NONE);
+  adg_logind_textfield = new GTextField(logind_window, 140, 190, 210, 50, G4P.SCROLLBARS_NONE);
   adg_logind_textfield.setPromptText("Adgangskode");
   adg_logind_textfield.setLocalColorScheme(GCScheme.SCHEME_8);
   adg_logind_textfield.setOpaque(true);
   adg_logind_textfield.addEventHandler(this, "adg_logind_textfield_change");
-  nybruger_button = new GButton(logind_window, 200, 390, 90, 30);
-  nybruger_button.setText("Lav ny profil");
+  nybruger_button = new GButton(logind_window, 200, 390, 90, 40);
+  nybruger_button.setText("Opret ny profil");
   nybruger_button.setLocalColorScheme(GCScheme.SCHEME_8);
   nybruger_button.addEventHandler(this, "nybruger_button_click");
   logind_button = new GButton(logind_window, 140, 290, 210, 30);
@@ -147,13 +152,32 @@ public void createGUI(){
   nybruger_label.setText("Har du ikke en bruger?");
   nybruger_label.setLocalColorScheme(GCScheme.SCHEME_10);
   nybruger_label.setOpaque(false);
-  nyprofil_window = GWindow.getWindow(this, "Window title", 0, 0, 500, 500, JAVA2D);
-  nyprofil_window.noLoop();
-  nyprofil_window.setActionOnClose(G4P.KEEP_OPEN);
-  nyprofil_window.addDrawHandler(this, "win_draw3");
+  nybruger_window = GWindow.getWindow(this, "Opret ny bruger", 0, 0, 500, 500, JAVA2D);
+  nybruger_window.noLoop();
+  nybruger_window.setActionOnClose(G4P.KEEP_OPEN);
+  nybruger_window.addDrawHandler(this, "win_draw3");
+  tlf_nybruger_textfield = new GTextField(nybruger_window, 140, 100, 210, 50, G4P.SCROLLBARS_NONE);
+  tlf_nybruger_textfield.setPromptText("Telefon nr.");
+  tlf_nybruger_textfield.setLocalColorScheme(GCScheme.SCHEME_8);
+  tlf_nybruger_textfield.setOpaque(true);
+  tlf_nybruger_textfield.addEventHandler(this, "tlf_nybruger_textfield_change");
+  adg1_nybruger_textfield = new GTextField(nybruger_window, 140, 190, 210, 50, G4P.SCROLLBARS_NONE);
+  adg1_nybruger_textfield.setPromptText("Adgangskode");
+  adg1_nybruger_textfield.setLocalColorScheme(GCScheme.SCHEME_8);
+  adg1_nybruger_textfield.setOpaque(true);
+  adg1_nybruger_textfield.addEventHandler(this, "adg1_nybruger_textfield_change");
+  adg2_nybruger_textfield = new GTextField(nybruger_window, 140, 260, 210, 50, G4P.SCROLLBARS_NONE);
+  adg2_nybruger_textfield.setPromptText("Gentag adgangskode");
+  adg2_nybruger_textfield.setLocalColorScheme(GCScheme.SCHEME_8);
+  adg2_nybruger_textfield.setOpaque(true);
+  adg2_nybruger_textfield.addEventHandler(this, "adg2_nybruger_textfield_change");
+  nybruger_final_button = new GButton(nybruger_window, 160, 350, 170, 50);
+  nybruger_final_button.setText("Opret bruger");
+  nybruger_final_button.setLocalColorScheme(GCScheme.SCHEME_8);
+  nybruger_final_button.addEventHandler(this, "nybruger_final_button_click");
   afbestil_window.loop();
   logind_window.loop();
-  nyprofil_window.loop();
+  nybruger_window.loop();
 }
 
 // Variable declarations 
@@ -173,4 +197,8 @@ GTextField adg_logind_textfield;
 GButton nybruger_button; 
 GButton logind_button; 
 GLabel nybruger_label; 
-GWindow nyprofil_window;
+GWindow nybruger_window;
+GTextField tlf_nybruger_textfield; 
+GTextField adg1_nybruger_textfield; 
+GTextField adg2_nybruger_textfield; 
+GButton nybruger_final_button; 
