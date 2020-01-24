@@ -54,56 +54,109 @@ public void customGUI() {
 }
 
 void keyPressed() {
+  //  switch (keyCode) {
+  //  case RIGHT:
+  //    hall.moveSeats(1, 0);
+  //    break;
+  //  case LEFT:
+  //    hall.moveSeats(-1, 0);
+  //    break;
+  //  case UP:
+  //    hall.moveSeats(0, -1);
+  //    break;
+  //  case DOWN:
+  //    hall.moveSeats(0, 1);
+  //    break;
+  //  }
+  //}
+
   switch (keyCode) {
   case RIGHT:
-    for (int i = hall.selected.length-1; i >= 0; i--) {
-      if (hall.selected[i].colNum + 1 < hall.cols) {
-        if (hall.seats[hall.selected[i].colNum + 1][hall.selected[i].rowNum].status < 1) {
-          hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
-          hall.seats[hall.selected[i].colNum + 1][hall.selected[i].rowNum].status = 1;
-          hall.selected[i] = hall.seats[hall.selected[i].colNum + 1][hall.selected[i].rowNum];
-        } else break;
-      } else break;
+    boolean blocked = true;
+    int move = 0;
+    while (blocked && hall.selected[hall.selected.length-1].colNum + move < hall.cols-1) {
+      blocked = false;
+      move++;
+
+      for (int i = hall.selected.length-1; i >= 0; i--) {
+        if (hall.seats[hall.selected[i].colNum + move][hall.selected[i].rowNum].status > 1) {
+          blocked = true;
+          break;
+        }
+      }
+    }
+    if (!blocked) {
+      for (int i = hall.selected.length-1; i >= 0; i--) {
+        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
+        hall.seats[hall.selected[i].colNum + move][hall.selected[i].rowNum].status = 1;
+        hall.selected[i] = hall.seats[hall.selected[i].colNum + move][hall.selected[i].rowNum];
+      }
     }
     break;
   case LEFT:
-    for (int i = 0; i < hall.selected.length; i++) {
-      if (hall.selected[i].colNum - 1 >= 0) {
-        if (hall.seats[hall.selected[i].colNum - 1][hall.selected[i].rowNum].status < 1) {
-          hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
-          hall.seats[hall.selected[i].colNum - 1][hall.selected[i].rowNum].status = 1;
-          hall.selected[i] = hall.seats[hall.selected[i].colNum - 1][hall.selected[i].rowNum];
-        } else {
-          for (int j = i; j >= 0; j--) {
-            hall.seats[hall.selected[j].colNum][hall.selected[j].rowNum].status = 0;
-            hall.seats[hall.selected[j].colNum + 1][hall.selected[j].rowNum].status = 1;
-            hall.selected[j] = hall.seats[hall.selected[j].colNum + 1][hall.selected[j].rowNum];
-          }
+    blocked = true;
+    move = 0;
+    while (blocked && hall.selected[0].colNum - move > 0) {
+      blocked = false;
+      move++;
+
+      for (int i = 0; i < hall.selected.length; i++) {
+        if (hall.seats[hall.selected[i].colNum - move][hall.selected[i].rowNum].status > 1) {
+          blocked = true;
+          break;
         }
-      } else break;
+      }
+    }
+    if (!blocked) {
+      for (int i = 0; i < hall.selected.length; i++) {
+        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
+        hall.seats[hall.selected[i].colNum - move][hall.selected[i].rowNum].status = 1;
+        hall.selected[i] = hall.seats[hall.selected[i].colNum - move][hall.selected[i].rowNum];
+      }
     }
     break;
   case UP:
-    for (int i = hall.selected.length-1; i >= 0; i--) {
-      if (hall.selected[i].rowNum - 1 >= 0) {
-        if (hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum - 1].status < 1) {
-          hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
-          hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum - 1].status = 1;
-          hall.selected[i] = hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum - 1];
-        } else break;
-      } else break;
+    blocked = true;
+    move = 0;
+    while (blocked && hall.selected[0].rowNum - move > 0) {
+      blocked = false;
+      move++;
+
+      for (int i = hall.selected.length-1; i >= 0; i--) {
+        if (hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum - move].status > 1) {
+          blocked = true;
+          break;
+        }
+      }
+    }
+    if (!blocked) {
+      for (int i = hall.selected.length-1; i >= 0; i--) {
+        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
+        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum - move].status = 1;
+        hall.selected[i] = hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum - move];
+      }
     }
     break;
   case DOWN:
-    for (int i = 0; i < hall.selected.length; i++) {
-      if (hall.selected[i].rowNum + 1 < hall.rows) {
-        if (hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum + 1].status < 1) {
-          hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
-          hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum + 1].status = 1;
-          hall.selected[i] = hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum + 1];
-        } else break;
-      } else break;
+    blocked = true;
+    move = 0;
+    while (blocked && move+hall.selected[hall.selected.length-1].rowNum < hall.rows-1) {
+      blocked = false;
+      move++;
+
+      for (int i = 0; i < hall.selected.length; i++) {
+        if (hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum + move].status > 1) {
+          blocked = true;
+          break;
+        }
+      }
     }
-    break;
+    if (!blocked) {
+      for (int i = 0; i < hall.selected.length; i++) {
+        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
+        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum + move].status = 1;
+        hall.selected[i] = hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum + move];
+      }
+    }
   }
 }
