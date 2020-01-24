@@ -26,7 +26,7 @@ class Hall {
       selectedLen++;
     }
     seats[5][5].status = 2;
-    //seats[7][5].status = 2;
+    seats[7][5].status = 2;
   }
 
   void display() {

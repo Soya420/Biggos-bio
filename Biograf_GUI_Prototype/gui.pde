@@ -15,11 +15,15 @@
  */
 
 public void billetter_dropList_click(GDropList source, GEvent event) { //_CODE_:billetter_dropList:237351:
-  for (int i = 0; i < hall.cols; i++) for (int j = 0; j < hall.rows; j++) {
-    if (hall.seats[i][j].status == 1) hall.seats[i][j].status = 0; 
+  for (int i = 0; i < hall.selected.length; i++) {
+    if (hall.selected[i].status == 1) {
+      hall.selected[i].status = 0;
+    }
   }
-  for (int i = 0; i < billetter_dropList.getSelectedIndex()+1; i++) {
+  hall.selected = new Seat[billetter_dropList.getSelectedIndex()+1];
+  for (int i = 0; i < hall.selected.length; i++) {
     hall.seats[i][0].status = 1;
+    hall.selected[i] = hall.seats[i][0];
   }
 } //_CODE_:billetter_dropList:237351:
 

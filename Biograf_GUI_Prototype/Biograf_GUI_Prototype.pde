@@ -30,7 +30,7 @@ public void customGUI() {
   afbestil_window.setVisible(false);
   nybruger_window.setVisible(false);
 
-  String[] tickets = new String[20];
+  String[] tickets = new String[12];
   for (int i = 0; i < tickets.length; i++) tickets[i] = (i+1)+"";
 
   billetter_dropList.setFont(new Font("Ariel", Font.PLAIN, 18));
@@ -54,74 +54,41 @@ public void customGUI() {
 }
 
 void keyPressed() {
-  //switch (keyCode) {
-  //case RIGHT:
-  //  for (Seat s : hall.selected) {
-  //    hall.seats[s.colNum][s.rowNum].status = 0;
-  //    hall.seats[s.colNum+1][s.rowNum].status = 1;
-  //  }
-  //  break;
-  //case LEFT:
-  //  for (int i = 0; i < hall.cols; i++) for (int j = 0; j < hall.rows; j++) {
-  //    if (hall.seats[i][j].status == 1) {
-  //      hall.seats[i][j].status = 0;
-  //      hall.seats[i-1][j].status = 1;
-  //    }
-  //  }
-  //  break;
-  //case UP:
-  //  for (int i = 0; i < hall.cols; i++) for (int j = 0; j < hall.rows; j++) {
-  //    if (hall.seats[i][j].status == 1) {
-  //      hall.seats[i][j].status = 0;
-  //      hall.seats[i][j-1].status = 1;
-  //    }
-  //  }
-  //  break;
-  //case DOWN:
-  //  for (int i = 0; i < hall.cols; i++) for (int j = hall.rows-1; j >= 0; j--) {
-  //    if (hall.seats[i][j].status == 1) {
-  //      hall.seats[i][j].status = 0;
-  //      hall.seats[i][j+1].status = 1;
-  //    }
-  //  }
-  //  break;
-  //}
-
-
-
   switch (keyCode) {
   case RIGHT:
-    for (int i = hall.cols-1; i >= 0; i--) for (int j = 0; j < hall.rows; j++) {
-      if (hall.seats[i][j].status == 1) {
-        hall.seats[i][j].status = 0;
-        if (hall.seats[i+1][j].status < 2) {
-          hall.seats[i+1][j].status = 1;
-        }
-      }
+    for (int i = hall.selected.length-1; i >= 0; i--) {
+      if (hall.selected[i].colNum + 1 < hall.cols) {
+        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
+        hall.seats[hall.selected[i].colNum + 1][hall.selected[i].rowNum].status = 1;
+        hall.selected[i] = hall.seats[hall.selected[i].colNum + 1][hall.selected[i].rowNum];
+      } else break;
     }
     break;
   case LEFT:
-    for (int i = 0; i < hall.cols; i++) for (int j = 0; j < hall.rows; j++) {
-      if (hall.seats[i][j].status == 1) {
-        hall.seats[i][j].status = 0;
-        hall.seats[i-1][j].status = 1;
-      }
+    for (int i = 0; i < hall.selected.length; i++) {
+      if (hall.selected[i].colNum - 1 >= 0) {
+        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
+        hall.seats[hall.selected[i].colNum - 1][hall.selected[i].rowNum].status = 1;
+        hall.selected[i] = hall.seats[hall.selected[i].colNum - 1][hall.selected[i].rowNum];
+      } else break;
     }
     break;
   case UP:
-    for (int i = 0; i < hall.cols; i++) for (int j = 0; j < hall.rows; j++) {
-      if (hall.seats[i][j].status == 1) {
-        hall.seats[i][j].status = 0;
-        hall.seats[i][j-1].status = 1;
-      }
+    for (int i = hall.selected.length-1; i >= 0; i--) {
+      if (hall.selected[i].rowNum - 1 >= 0) {
+        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
+        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum - 1].status = 1;
+        hall.selected[i] = hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum - 1];
+      } else break;
     }
     break;
   case DOWN:
-    for (int i = 0; i < hall.cols; i++) for (int j = hall.rows-1; j >= 0; j--) {
-      if (hall.seats[i][j].status == 1) {
-        hall.seats[i][j].status = 0;
-        hall.seats[i][j+1].status = 1;
-      }
+    for (int i = 0; i < hall.selected.length; i++) {
+      if (hall.selected[i].rowNum + 1 < hall.rows) {
+        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
+        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum + 1].status = 1;
+        hall.selected[i] = hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum + 1];
+      } else break;
     }
     break;
   }
