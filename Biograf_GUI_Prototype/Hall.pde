@@ -18,15 +18,14 @@ class Hall {
     
     //laver array for valgte sæder
     selected = new Seat[billetter_dropList.getSelectedIndex()+1];
-    int selectedLen = 0;
     
     for (int i = 0; i < billetter_dropList.getSelectedIndex()+1; i++) {
       seats[i][0].status = 1;
-      selected[selectedLen] = seats[i][0];
-      selectedLen++;
+      selected[i] = seats[i][0];
     }
-    seats[5][5].status = 2;
-    seats[7][5].status = 2;
+    seats[5][5].status = 3;
+    seats[6][5].status = 3;
+    seats[7][5].status = 3;
   }
 
   void display() {
