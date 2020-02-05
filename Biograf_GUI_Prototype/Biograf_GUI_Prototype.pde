@@ -1,11 +1,14 @@
 import g4p_controls.*;
 import java.awt.*;
 Hall hall;
+ServerHandler sh;
 
 public void setup() {
   size(1280, 720, JAVA2D);
   createGUI();
   customGUI();
+  sh = new ServerHandler();
+  sh.getStartData();
   rectMode(CENTER);
   textAlign(CENTER, TOP);
   textSize(35);

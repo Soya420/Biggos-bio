@@ -23,15 +23,15 @@ class Hall {
       seats[i][0].status = 1;
       selected[i] = seats[i][0];
     }
-    seats[5][5].status = 3;
-    seats[6][5].status = 3;
-    seats[7][5].status = 3;
-    seats[7][6].status = 3;
-    seats[7][7].status = 3;
-    seats[7][8].status = 3;
-    seats[5][2].status = 3;
-    seats[8][2].status = 3;
-    seats[3][9].status = 3;
+    seats[5][5].status = 2;
+    seats[6][5].status = 2;
+    seats[7][5].status = 2;
+    seats[7][6].status = 2;
+    seats[7][7].status = 2;
+    seats[7][8].status = 2;
+    seats[5][2].status = 2;
+    seats[8][2].status = 2;
+    seats[3][9].status = 2;
   }
 
   void display() {
