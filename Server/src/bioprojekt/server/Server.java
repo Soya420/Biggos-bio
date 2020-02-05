@@ -12,13 +12,11 @@ public class Server implements Runnable, Closeable{
 	private boolean stop;
 
 	private ServerSocket serverSocket;
-	private Socket socket;
 
 	private List<ClientHandler> clients;
 
 	public Server() throws Exception {
 		serverSocket = new ServerSocket(8777);
-		socket = serverSocket.accept();
 
 		clients = new ArrayList<>();
 
@@ -65,6 +63,14 @@ public class Server implements Runnable, Closeable{
 			c.close();
 		}
 
+	}
+	
+	public String handleMessage(String input) {
+		String[] args = input.split(" ");
+		
+		
+		return input;
+		
 	}
 
 }
