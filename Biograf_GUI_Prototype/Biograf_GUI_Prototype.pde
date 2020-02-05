@@ -6,7 +6,6 @@ public void setup() {
   size(1280, 720, JAVA2D);
   createGUI();
   customGUI();
-  // Place your setup code here
   rectMode(CENTER);
   textAlign(CENTER, TOP);
   textSize(35);
@@ -19,8 +18,25 @@ public void draw() {
   hall.display();
 }
 
-// Use this method to add additional statements
-// to customise the GUI controls
+void keyPressed() {
+  if (key == CODED) {
+    switch (keyCode) {
+    case RIGHT:
+      hall.right();
+      break;
+    case LEFT:
+      hall.left();
+      break;
+    case DOWN:
+      hall.down();
+      break;
+    case UP:
+      hall.up();
+      break;
+    }
+  }
+}
+
 public void customGUI() {
   logind_window.setLocation(710, 290);
   afbestil_window.setLocation(710, 290);
@@ -51,45 +67,4 @@ public void customGUI() {
   tlf_nybruger_textfield.setFont(new Font("Ariel", Font.PLAIN, 18));
   adg1_nybruger_textfield.setFont(new Font("Ariel", Font.PLAIN, 18));
   adg2_nybruger_textfield.setFont(new Font("Ariel", Font.PLAIN, 18));
-}
-
-void keyPressed() {
-  switch (keyCode) {
-  case RIGHT:
-    for (int i = hall.selected.length-1; i >= 0; i--) {
-      if (hall.selected[i].colNum + 1 < hall.cols) {
-        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
-        hall.seats[hall.selected[i].colNum + 1][hall.selected[i].rowNum].status = 1;
-        hall.selected[i] = hall.seats[hall.selected[i].colNum + 1][hall.selected[i].rowNum];
-      } else break;
-    }
-    break;
-  case LEFT:
-    for (int i = 0; i < hall.selected.length; i++) {
-      if (hall.selected[i].colNum - 1 >= 0) {
-        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
-        hall.seats[hall.selected[i].colNum - 1][hall.selected[i].rowNum].status = 1;
-        hall.selected[i] = hall.seats[hall.selected[i].colNum - 1][hall.selected[i].rowNum];
-      } else break;
-    }
-    break;
-  case UP:
-    for (int i = hall.selected.length-1; i >= 0; i--) {
-      if (hall.selected[i].rowNum - 1 >= 0) {
-        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
-        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum - 1].status = 1;
-        hall.selected[i] = hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum - 1];
-      } else break;
-    }
-    break;
-  case DOWN:
-    for (int i = 0; i < hall.selected.length; i++) {
-      if (hall.selected[i].rowNum + 1 < hall.rows) {
-        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
-        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum + 1].status = 1;
-        hall.selected[i] = hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum + 1];
-      } else break;
-    }
-    break;
-  }
 }
