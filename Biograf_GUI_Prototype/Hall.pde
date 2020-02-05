@@ -51,51 +51,98 @@ class Hall {
     fill(255);
     text("LÆRRED", 640, 20);
   }
+  
+  
 
-/*
-  void moveSeats(int x, int y) {
+  void right() {
     boolean blocked = true;
     int move = 0;
-    while (blocked &&
-      selected[0].colNum + x*move >= 0 &&
-      selected[selected.length-1].colNum + x*move < cols-1 &&
-      selected[0].rowNum + y*move >= 0 &&
-      selected[selected.length-1].rowNum + y*move < rows-1) {
+    while (blocked && selected[selected.length-1].colNum + move < cols-1) {
       blocked = false;
       move++;
 
-      //højre og ned
-      if (x == 1 || y == 1) {
-        for (int i = hall.selected.length-1; i >= 0; i--) {
-          if (hall.seats[hall.selected[i].colNum + x*move][hall.selected[i].rowNum + y*move].status > 1) {
-            blocked = true;
-            break;
-          }
-        }
-      } else {
-        //venstre og op
-        for (int i = 0; i < hall.selected.length; i++) {
-          if (hall.seats[hall.selected[i].colNum + x*move][hall.selected[i].rowNum + y*move].status > 1) {
-            blocked = true;
-            break;
-          }
+      for (int i = selected.length-1; i >= 0; i--) {
+        if (seats[selected[i].colNum + move][selected[i].rowNum].status > 1) {
+          blocked = true;
+          break;
         }
       }
     }
     if (!blocked) {
-      if (x == 1 || y == 1) {
-        for (int i = hall.selected.length-1; i >= 0; i--) {
-          hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
-          hall.seats[hall.selected[i].colNum + x*move][hall.selected[i].rowNum + y*move].status = 1;
-          hall.selected[i] = hall.seats[hall.selected[i].colNum + x*move][hall.selected[i].rowNum + y*move];
-        }
-      } else {
-        for (int i = 0; i < hall.selected.length; i++) {
-          hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
-          hall.seats[hall.selected[i].colNum + x*move][hall.selected[i].rowNum + y*move].status = 1;
-          hall.selected[i] = hall.seats[hall.selected[i].colNum + x*move][hall.selected[i].rowNum + y*move];
+      for (int i = selected.length-1; i >= 0; i--) {
+        seats[selected[i].colNum][selected[i].rowNum].status = 0;
+        seats[selected[i].colNum + move][selected[i].rowNum].status = 1;
+        selected[i] = seats[selected[i].colNum + move][selected[i].rowNum];
+      }
+    }
+  }
+
+  void left() {
+    boolean blocked = true;
+    int move = 0;
+    while (blocked && selected[0].colNum - move > 0) {
+      blocked = false;
+      move++;
+
+      for (int i = 0; i < selected.length; i++) {
+        if (seats[selected[i].colNum - move][selected[i].rowNum].status > 1) {
+          blocked = true;
+          break;
         }
       }
     }
-  }*/
+    if (!blocked) {
+      for (int i = 0; i < selected.length; i++) {
+        seats[selected[i].colNum][selected[i].rowNum].status = 0;
+        seats[selected[i].colNum - move][selected[i].rowNum].status = 1;
+        selected[i] = seats[selected[i].colNum - move][selected[i].rowNum];
+      }
+    }
+  }
+
+  void down() {
+    boolean blocked = true;
+    int move = 0;
+    while (blocked && move+selected[selected.length-1].rowNum < rows-1) {
+      blocked = false;
+      move++;
+
+      for (int i = 0; i < selected.length; i++) {
+        if (seats[selected[i].colNum][selected[i].rowNum + move].status > 1) {
+          blocked = true;
+          break;
+        }
+      }
+    }
+    if (!blocked) {
+      for (int i = 0; i < selected.length; i++) {
+        seats[selected[i].colNum][selected[i].rowNum].status = 0;
+        seats[selected[i].colNum][selected[i].rowNum + move].status = 1;
+        selected[i] = seats[selected[i].colNum][selected[i].rowNum + move];
+      }
+    }
+  }
+
+  void up() {
+    boolean blocked = true;
+    int move = 0;
+    while (blocked && selected[0].rowNum - move > 0) {
+      blocked = false;
+      move++;
+
+      for (int i = selected.length-1; i >= 0; i--) {
+        if (seats[selected[i].colNum][selected[i].rowNum - move].status > 1) {
+          blocked = true;
+          break;
+        }
+      }
+    }
+    if (!blocked) {
+      for (int i = selected.length-1; i >= 0; i--) {
+        seats[selected[i].colNum][selected[i].rowNum].status = 0;
+        seats[selected[i].colNum][selected[i].rowNum - move].status = 1;
+        selected[i] = seats[selected[i].colNum][selected[i].rowNum - move];
+      }
+    }
+  }
 }

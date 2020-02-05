@@ -6,7 +6,6 @@ public void setup() {
   size(1280, 720, JAVA2D);
   createGUI();
   customGUI();
-  // Place your setup code here
   rectMode(CENTER);
   textAlign(CENTER, TOP);
   textSize(35);
@@ -19,8 +18,25 @@ public void draw() {
   hall.display();
 }
 
-// Use this method to add additional statements
-// to customise the GUI controls
+void keyPressed() {
+  if (key == CODED) {
+    switch (keyCode) {
+    case RIGHT:
+      hall.right();
+      break;
+    case LEFT:
+      hall.left();
+      break;
+    case DOWN:
+      hall.down();
+      break;
+    case UP:
+      hall.up();
+      break;
+    }
+  }
+}
+
 public void customGUI() {
   logind_window.setLocation(710, 290);
   afbestil_window.setLocation(710, 290);
@@ -51,112 +67,4 @@ public void customGUI() {
   tlf_nybruger_textfield.setFont(new Font("Ariel", Font.PLAIN, 18));
   adg1_nybruger_textfield.setFont(new Font("Ariel", Font.PLAIN, 18));
   adg2_nybruger_textfield.setFont(new Font("Ariel", Font.PLAIN, 18));
-}
-
-void keyPressed() {
-  //  switch (keyCode) {
-  //  case RIGHT:
-  //    hall.moveSeats(1, 0);
-  //    break;
-  //  case LEFT:
-  //    hall.moveSeats(-1, 0);
-  //    break;
-  //  case UP:
-  //    hall.moveSeats(0, -1);
-  //    break;
-  //  case DOWN:
-  //    hall.moveSeats(0, 1);
-  //    break;
-  //  }
-  //}
-
-  switch (keyCode) {
-  case RIGHT:
-    boolean blocked = true;
-    int move = 0;
-    while (blocked && hall.selected[hall.selected.length-1].colNum + move < hall.cols-1) {
-      blocked = false;
-      move++;
-
-      for (int i = hall.selected.length-1; i >= 0; i--) {
-        if (hall.seats[hall.selected[i].colNum + move][hall.selected[i].rowNum].status > 1) {
-          blocked = true;
-          break;
-        }
-      }
-    }
-    if (!blocked) {
-      for (int i = hall.selected.length-1; i >= 0; i--) {
-        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
-        hall.seats[hall.selected[i].colNum + move][hall.selected[i].rowNum].status = 1;
-        hall.selected[i] = hall.seats[hall.selected[i].colNum + move][hall.selected[i].rowNum];
-      }
-    }
-    break;
-  case LEFT:
-    blocked = true;
-    move = 0;
-    while (blocked && hall.selected[0].colNum - move > 0) {
-      blocked = false;
-      move++;
-
-      for (int i = 0; i < hall.selected.length; i++) {
-        if (hall.seats[hall.selected[i].colNum - move][hall.selected[i].rowNum].status > 1) {
-          blocked = true;
-          break;
-        }
-      }
-    }
-    if (!blocked) {
-      for (int i = 0; i < hall.selected.length; i++) {
-        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
-        hall.seats[hall.selected[i].colNum - move][hall.selected[i].rowNum].status = 1;
-        hall.selected[i] = hall.seats[hall.selected[i].colNum - move][hall.selected[i].rowNum];
-      }
-    }
-    break;
-  case UP:
-    blocked = true;
-    move = 0;
-    while (blocked && hall.selected[0].rowNum - move > 0) {
-      blocked = false;
-      move++;
-
-      for (int i = hall.selected.length-1; i >= 0; i--) {
-        if (hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum - move].status > 1) {
-          blocked = true;
-          break;
-        }
-      }
-    }
-    if (!blocked) {
-      for (int i = hall.selected.length-1; i >= 0; i--) {
-        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
-        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum - move].status = 1;
-        hall.selected[i] = hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum - move];
-      }
-    }
-    break;
-  case DOWN:
-    blocked = true;
-    move = 0;
-    while (blocked && move+hall.selected[hall.selected.length-1].rowNum < hall.rows-1) {
-      blocked = false;
-      move++;
-
-      for (int i = 0; i < hall.selected.length; i++) {
-        if (hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum + move].status > 1) {
-          blocked = true;
-          break;
-        }
-      }
-    }
-    if (!blocked) {
-      for (int i = 0; i < hall.selected.length; i++) {
-        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum].status = 0;
-        hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum + move].status = 1;
-        hall.selected[i] = hall.seats[hall.selected[i].colNum][hall.selected[i].rowNum + move];
-      }
-    }
-  }
 }
