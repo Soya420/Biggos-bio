@@ -15,13 +15,13 @@ public final class ResultSetHelper {
 	
 	public static Cinema toCinema (ResultSet rs) throws SQLException {
 		rs.next();
-		return new Cinema(rs.getInt(1), rs.getString(2), rs.getInt(3));
+		return new Cinema(rs.getInt(1), rs.getString(2));
 	}
 	
 	public static Vector<Cinema> toCinemas(ResultSet rs) throws SQLException{
 		Vector<Cinema> cinemas = new Vector<>();
 		while (rs.next()) {
-			cinemas.add(new Cinema(rs.getInt(1), rs.getString(2), rs.getInt(3)));
+			cinemas.add(new Cinema(rs.getInt(1), rs.getString(2)));
 		}
 		return cinemas;
 	}

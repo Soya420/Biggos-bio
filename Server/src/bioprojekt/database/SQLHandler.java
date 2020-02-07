@@ -52,9 +52,9 @@ public class SQLHandler {
 
 	public void addCinema(Cinema c) throws SQLException {
 		if (c.id == -1) {
-			execute("INSERT INTO cinema VALUES (DEFAULT, \"" + c.name + "\", " + c.layout_id + ");");
+			execute("INSERT INTO cinema VALUES (DEFAULT, \"" + c.name + "\");");
 		} else {
-			execute("INSERT INTO cinema VALUES (" + c.id + ", \"" + c.name + "\", " + c.layout_id + ");");
+			execute("INSERT INTO cinema VALUES (" + c.id + ", \"" + c.name + "\");");
 		}
 	}
 

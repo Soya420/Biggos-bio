@@ -5,9 +5,10 @@ import bioprojekt.server.Server;
 
 public class Main {
 	public static Server server;
-	static SQLHandler sqlh;
+	public static SQLHandler sqlh;
 	
 	public static void main(String[] args) throws Exception {
+		
 		server = new Server();
 		
 		sqlh = new SQLHandler();
