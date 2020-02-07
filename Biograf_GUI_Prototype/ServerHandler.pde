@@ -2,7 +2,6 @@ import java.net.Socket;
 import java.io.*;
 
 class ServerHandler {
-  String startData;
   BufferedReader br;
   PrintStream ps;
   Socket socket;
@@ -16,27 +15,55 @@ class ServerHandler {
     catch(IOException e) {
       e.printStackTrace();
     }
-    finally {
-      try {
-        ps.close();
-        br.close();
-      }
-      catch(IOException e) {
-        e.printStackTrace();
-      }
-    }
-    startData = new String("");
+    //finally {
+    //  try {
+    //    ps.close();
+    //    br.close();
+    //  }
+    //  catch(IOException e) {
+    //    e.printStackTrace();
+    //  }
+    //}
   }
 
-  void getStartData() {
-    ps.println(startData);
+  void getData(String table) {
+    String data = new String("g ");
+
+    data += table;
+
+    ps.println(data);
   }
-  
-  void search() {
-    
+
+  void reserve(String username, String password) {
+    String login = new String("r ");
+
+    login += username + " ";
+
+    login += password;
+
+    ps.println(login);
   }
-  
-  void reserve() {
-    
+
+  void createLogin(String username, String password) {
+    String createLogin = new String("c ");
+
+    createLogin += username + " ";
+
+    createLogin += password;
+
+    ps.println(createLogin);
+  }
+
+  void handleMessages() {
+    String message;
+
+    try {
+      while ((message = br.readLine()) != null) {
+        println(message);
+      }
+    }
+    catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }
