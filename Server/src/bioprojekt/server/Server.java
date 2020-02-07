@@ -4,8 +4,13 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
+
+import bioprojekt.Main;
+import bioprojekt.database.Cinema;
 
 public class Server implements Runnable, Closeable{
 
@@ -65,12 +70,26 @@ public class Server implements Runnable, Closeable{
 
 	}
 	
-	public String handleMessage(String input) {
+	public String handleMessage(String input) throws SQLException {
 		String[] args = input.split(" ");
 		
-		
-		return input;
-		
+		switch(args[0]) {
+		case("g"):
+			
+			Vector<Cinema> cinemas = Main.sqlh.getAllCinemas();
+			String response = "";
+			for(Cinema c: cinemas) {
+				response += c.name + "," + c.id + ";";
+			}
+			return response;
+		case("r"):
+			
+			break;
+		case("c"):
+			
+			break;
+		}
+		return "";
 	}
 
 }

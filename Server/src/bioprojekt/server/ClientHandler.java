@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.sql.SQLException;
 
 public class ClientHandler implements Runnable, Closeable {
 
@@ -38,13 +39,22 @@ public class ClientHandler implements Runnable, Closeable {
 				){
 
 			while(!server.getStop()) {
+				
 				String strLine = br.readLine();
+				if (strLine == null) {
+					Thread.sleep(100);
+					continue;
+				}
 				String response = server.handleMessage(strLine);
 				ps.println(response);
 			}
 
 		} catch (IOException e) {
 			System.out.println("Client " + clientHandlerNumber + " disconnected");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 		if (!socket.isClosed()) {
 			try {
