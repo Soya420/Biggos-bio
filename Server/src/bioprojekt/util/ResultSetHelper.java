@@ -8,6 +8,7 @@ import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 import bioprojekt.database.Cinema;
+import bioprojekt.database.Hall;
 
 public final class ResultSetHelper {
 
@@ -24,6 +25,14 @@ public final class ResultSetHelper {
 			cinemas.add(new Cinema(rs.getInt(1), rs.getString(2)));
 		}
 		return cinemas;
+	}
+	
+	public static Vector<Hall> toHalls(ResultSet rs) throws SQLException{
+		Vector<Hall> halls = new Vector<>();
+		while (rs.next()) {
+			halls.add(new Hall(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5)));
+		}
+		return halls;
 	}
 
 	public static DefaultTableModel buildTableModel(ResultSet rs) throws SQLException {

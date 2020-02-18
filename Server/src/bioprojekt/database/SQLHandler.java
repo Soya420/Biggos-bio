@@ -1,11 +1,18 @@
 package bioprojekt.database;
 
-import java.sql.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Vector;
 
 import bioprojekt.util.ResultSetHelper;
-
-import java.io.*;
 
 public class SQLHandler {
 
@@ -57,7 +64,18 @@ public class SQLHandler {
 			execute("INSERT INTO cinema VALUES (" + c.id + ", \"" + c.name + "\");");
 		}
 	}
-
+	
+	public Vector<Hall> getAllHalls() throws SQLException {
+		return ResultSetHelper.toHalls(executeQ("SELECT * FROM cinema.cinema;"));
+	}
+	
+	public void addHall(Hall h) throws SQLException {
+		if (h.id == -1) {
+			execute("INSERT INTO hall VALUES (DEFAULT, " + h.rows + ", " + h.coloumns + ", " + h.cinemaID + " \"" + h.movie + "\");");
+		} else {
+			execute("INSERT INTO hall VALUES (" + h.id + ", " + h.rows + ", " + h.coloumns + ", " + h.cinemaID + " \"" + h.movie + "\");");
+		}
+	}
 }
 
 class SQLLogin {

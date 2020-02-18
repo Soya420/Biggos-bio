@@ -69,24 +69,32 @@ public class Server implements Runnable, Closeable{
 		}
 
 	}
-	
+
 	public String handleMessage(String input) throws SQLException {
 		String[] args = input.split(" ");
-		
+
 		switch(args[0]) {
 		case("g"):
-			
-			Vector<Cinema> cinemas = Main.sqlh.getAllCinemas();
-			String response = "";
+			switch(args[1]) {
+			case("cinemas"):
+				Vector<Cinema> cinemas = Main.sqlh.getAllCinemas();
+			String cResponse = "";
 			for(Cinema c: cinemas) {
-				response += c.name + "," + c.id + ";";
+				cResponse += c.name + "," + c.id + ";";
 			}
-			return response;
-		case("r"):
+			return cResponse;
+
+			case("halls"):
+				
+				String hResponse = "";
 			
+				return hResponse;
+			}
+		case("r"):
+
 			break;
 		case("c"):
-			
+
 			break;
 		}
 		return "";
