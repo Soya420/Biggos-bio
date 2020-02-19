@@ -34,7 +34,7 @@ class ServerHandler {
     ps.println(data);
   }
 
-  void reserve(String username, String password) {
+  void reserve(int username, String password) {
     String login = new String("r ");
 
     login += username + " ";
@@ -44,14 +44,14 @@ class ServerHandler {
     ps.println(login);
   }
 
-  void createLogin(String username, String password) {
-    String createLogin = new String("c ");
+  void createUser(int username, String password) {
+    String createUser = new String("c ");
 
-    createLogin += username + " ";
+    createUser += username + " ";
 
-    createLogin += password;
+    createUser += password;
 
-    ps.println(createLogin);
+    ps.println(createUser);
   }
 
   void handleMessages() {
@@ -60,6 +60,19 @@ class ServerHandler {
     try {
       while ((message = br.readLine()) != null) {
         println(message);
+
+        //cinemas test
+        String[] cinemas = message.split(";");
+        //for (int i = 0; i < cinemas.length; i++) {
+        //  //message.split(",");
+        //}
+        if (biograf_dropList.hasFocus() && !updated) {
+          biograf_dropList.setItems(cinemas, biograf_dropList.getSelectedIndex());
+          updated = true;
+        }
+        if (!biograf_dropList.hasFocus()) {
+          updated = false;
+        }
       }
     }
     catch (IOException e) {

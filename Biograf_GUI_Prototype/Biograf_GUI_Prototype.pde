@@ -44,14 +44,44 @@ void keyPressed() {
 }
 
 void updateGUI() {
+  //sh.getData("g cinemas");
+  
+  String message = "Værløse,1;Lyngby,2;Herlev,3;København,4;";
+  String[] cinemas = message.split(";");
+  
   if (biograf_dropList.hasFocus() && !updated) {
-    String[] s = {"test", "ok", "test igen"};
-    biograf_dropList.setItems(s, 0);
+    biograf_dropList.setItems(cinemas, biograf_dropList.getSelectedIndex());
     updated = true;
   }
   if (!biograf_dropList.hasFocus()) {
     updated = false;
   }
+
+  //if (biograf_dropList.hasFocus() && !updated) {
+  //  //sh.getData("g cinemas");
+  //  String[] s = {"test", "ok", "test igen"};
+  //  biograf_dropList.setItems(s, 0);
+  //  updated = true;
+  //}
+  //if (!biograf_dropList.hasFocus()) {
+  //  updated = false;
+  //}
+}
+
+boolean isInteger(String s) {
+  //skal være positiv
+  if (s.charAt(0) == '-') return false;
+
+  try { 
+    Integer.parseInt(s);
+  } 
+  catch(NumberFormatException e) { 
+    return false;
+  } 
+  catch(NullPointerException e) {
+    return false;
+  }
+  return true;
 }
 
 public void customGUI() {
@@ -80,8 +110,10 @@ public void customGUI() {
   tlf_logind_textfield.setFont(new Font("Ariel", Font.PLAIN, 18));
   adg_logind_textfield.setFont(new Font("Ariel", Font.PLAIN, 18));
   nybruger_button.setFont(new Font("Ariel", Font.PLAIN, 15));
-  logind_button.setFont(new Font("Ariel", Font.PLAIN, 24)); 
-  nybruger_label.setFont(new Font("Ariel", Font.PLAIN, 18)); 
+  logind_button.setFont(new Font("Ariel", Font.PLAIN, 24));
+  logind_label.setFont(new Font("Ariel", Font.PLAIN, 15));
+  nybruger_label.setFont(new Font("Ariel", Font.PLAIN, 18));
+  nybruger_final_label.setFont(new Font("Ariel", Font.PLAIN, 15));
   nybruger_final_button.setFont(new Font("Ariel", Font.PLAIN, 18));
   tlf_nybruger_textfield.setFont(new Font("Ariel", Font.PLAIN, 18));
   adg1_nybruger_textfield.setFont(new Font("Ariel", Font.PLAIN, 18));
