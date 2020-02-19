@@ -23,4 +23,8 @@ public static final int NO_ID = -1;
 		this.movie = movie;
 	}
 	
+	void upload() {
+		
+	}
+	
 }
