@@ -54,6 +54,22 @@ void updateGUI() {
   }
 }
 
+boolean isInteger(String s) {
+  //skal være positiv
+  if (s.charAt(0) == '-') return false;
+  
+  try { 
+    Integer.parseInt(s);
+  } 
+  catch(NumberFormatException e) { 
+    return false;
+  } 
+  catch(NullPointerException e) {
+    return false;
+  }
+  return true;
+}
+
 public void customGUI() {
   logind_window.setLocation(710, 290);
   afbestil_window.setLocation(710, 290);
@@ -80,8 +96,10 @@ public void customGUI() {
   tlf_logind_textfield.setFont(new Font("Ariel", Font.PLAIN, 18));
   adg_logind_textfield.setFont(new Font("Ariel", Font.PLAIN, 18));
   nybruger_button.setFont(new Font("Ariel", Font.PLAIN, 15));
-  logind_button.setFont(new Font("Ariel", Font.PLAIN, 24)); 
-  nybruger_label.setFont(new Font("Ariel", Font.PLAIN, 18)); 
+  logind_button.setFont(new Font("Ariel", Font.PLAIN, 24));
+  logind_label.setFont(new Font("Ariel", Font.PLAIN, 15));
+  nybruger_label.setFont(new Font("Ariel", Font.PLAIN, 18));
+  nybruger_final_label.setFont(new Font("Ariel", Font.PLAIN, 15));
   nybruger_final_button.setFont(new Font("Ariel", Font.PLAIN, 18));
   tlf_nybruger_textfield.setFont(new Font("Ariel", Font.PLAIN, 18));
   adg1_nybruger_textfield.setFont(new Font("Ariel", Font.PLAIN, 18));

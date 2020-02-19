@@ -69,11 +69,10 @@ public void nybruger_button_click(GButton source, GEvent event) { //_CODE_:nybru
 } //_CODE_:nybruger_button:361476:
 
 public void logind_button_click(GButton source, GEvent event) { //_CODE_:logind_button:364978:
-  if (1==2) {
-    logind_label.setText("");
+  if (1==1) {
     logind_window.setVisible(false);
   } else {
-    logind_label.setText("Forkert brugernavn eller adgangskode");
+    logind_label.setText("Forkert brugernavn");
   }
 } //_CODE_:logind_button:364978:
 
@@ -94,15 +93,30 @@ public void nybruger_final_button_click(GButton source, GEvent event) { //_CODE_
   String username = tlf_nybruger_textfield.getText();
   String password = adg1_nybruger_textfield.getText();
 
-  if (username.length() == 8 && isInteger(username)) {
+  if (isInteger(username)) {
+    if (username.length() == 8) {
 
-    if (password.equals(adg2_nybruger_textfield.getText())) {
-      //sh.createLogin(username, password);
+      boolean containsSpace = false;
+      for (int i = 0; i < password.length(); i++) {
+        if (password.charAt(i) == ' ') {
+          containsSpace = true;
+          break;
+        }
+      }
+      if (!containsSpace) {
+        if (password.equals(adg2_nybruger_textfield.getText())) {
+          //sh.createLogin(username, password);
 
-      nybruger_final_label.setText("");
-      nybruger_window.setVisible(false);
+          nybruger_final_label.setText("");
+          nybruger_window.setVisible(false);
+        } else {
+          nybruger_final_label.setText("Forkert gentaget adgangskode");
+        }
+      } else {
+        nybruger_final_label.setText("Adgangskode indeholder ugyldigt tegn");
+      }
     } else {
-      nybruger_final_label.setText("Forkert gentaget adgangskode");
+      nybruger_final_label.setText("Telefonnummer skal være på 8 cifre");
     }
   } else {
     nybruger_final_label.setText("Telefonnummer skal være på 8 cifre");
