@@ -60,6 +60,19 @@ class ServerHandler {
     try {
       while ((message = br.readLine()) != null) {
         println(message);
+
+        //cinemas test
+        String[] cinemas = message.split(";");
+        //for (int i = 0; i < cinemas.length; i++) {
+        //  //message.split(",");
+        //}
+        if (biograf_dropList.hasFocus() && !updated) {
+          biograf_dropList.setItems(cinemas, biograf_dropList.getSelectedIndex());
+          updated = true;
+        }
+        if (!biograf_dropList.hasFocus()) {
+          updated = false;
+        }
       }
     }
     catch (IOException e) {

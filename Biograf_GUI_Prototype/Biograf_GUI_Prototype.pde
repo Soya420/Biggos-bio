@@ -44,20 +44,34 @@ void keyPressed() {
 }
 
 void updateGUI() {
+  //sh.getData("g cinemas");
+  
+  String message = "Værløse,1;Lyngby,2;Herlev,3;København,4;";
+  String[] cinemas = message.split(";");
+  
   if (biograf_dropList.hasFocus() && !updated) {
-    String[] s = {"test", "ok", "test igen"};
-    biograf_dropList.setItems(s, 0);
+    biograf_dropList.setItems(cinemas, biograf_dropList.getSelectedIndex());
     updated = true;
   }
   if (!biograf_dropList.hasFocus()) {
     updated = false;
   }
+
+  //if (biograf_dropList.hasFocus() && !updated) {
+  //  //sh.getData("g cinemas");
+  //  String[] s = {"test", "ok", "test igen"};
+  //  biograf_dropList.setItems(s, 0);
+  //  updated = true;
+  //}
+  //if (!biograf_dropList.hasFocus()) {
+  //  updated = false;
+  //}
 }
 
 boolean isInteger(String s) {
   //skal være positiv
   if (s.charAt(0) == '-') return false;
-  
+
   try { 
     Integer.parseInt(s);
   } 
