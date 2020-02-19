@@ -71,7 +71,7 @@ public class SQLHandler {
 	
 	public void addHall(Hall h) throws SQLException {
 		if (h.id == -1) {
-			execute("INSERT INTO hall VALUES (DEFAULT, " + h.rows + ", " + h.coloumns + ", " + h.cinemaID + " \"" + h.movie + "\");");
+			execute("INSERT INTO hall VALUES (DEFAULT, " + h.rows + ", " + h.coloumns + ", " + h.cinemaID + ", \"" + h.movie + "\");");
 		} else {
 			execute("INSERT INTO hall VALUES (" + h.id + ", " + h.rows + ", " + h.coloumns + ", " + h.cinemaID + " \"" + h.movie + "\");");
 		}

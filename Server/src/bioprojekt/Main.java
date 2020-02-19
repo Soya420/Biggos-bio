@@ -10,8 +10,8 @@ public class Main {
 	
 	public static void main(String[] args) throws Exception {
 		
-		Cinema c = new Cinema(100, "Værløse");
-		Hall h = new Hall(100, 10, 10, 2, "100tyve");
+		Cinema c = new Cinema("Værløse");
+		Hall h = new Hall(10, 10, 5, "100tyve");
 		
 		server = new Server();
 		
