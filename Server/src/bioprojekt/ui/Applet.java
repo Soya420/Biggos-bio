@@ -1,0 +1,71 @@
+package bioprojekt.ui;
+
+import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import bioprojekt.Main;
+import bioprojekt.database.SQLHandler;
+
+public class Applet extends JFrame {
+	
+	public static final Dimension DEFAULT_PAGE_DIMENSION = new Dimension(800, 800);
+	
+	// Uses a JTabbedPane as container, to enable multiple menus.
+	private JTabbedPane contentPane;
+	public SQLHandler sqlh;
+	
+	// this has IO streams that need closing, therefore we need to save it
+	
+	public Applet() {
+		super("Server / Admin Tool");
+		
+		sqlh = new SQLHandler();
+		
+		// sets default look and feel for every component to fit OS look and feel.
+		// these exceptions are the only that would be thrown outside the GUI implemented console
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
+		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				Main.exit();
+			}
+		});
+		
+		setLocation(400, 200);
+		
+		contentPane = new JTabbedPane();
+		
+		setContentPane(contentPane);
+		
+		// adds null as text because custom tabs later
+		contentPane.addTab(null, new AddMenu());
+		
+		// Custom tabs
+		contentPane.setTabComponentAt(0, getTabLabel("Add menu"));
+		
+		pack();
+		setVisible(true);
+	}
+	
+	// returns a tab label in default size with provided text
+	public static JComponent getTabLabel(String tabText) {
+		JLabel tabLabel = new JLabel(tabText, SwingConstants.CENTER);
+		tabLabel.setPreferredSize(new Dimension(80, 12));
+		return tabLabel;
+	}
+}
