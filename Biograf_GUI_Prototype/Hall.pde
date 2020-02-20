@@ -23,6 +23,7 @@ class Hall {
       seats[i][0].status = 1;
       selected[i] = seats[i][0];
     }
+
   }
 
   void display() {

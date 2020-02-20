@@ -97,7 +97,7 @@ public void nybruger_final_button_click(GButton source, GEvent event) { //_CODE_
   if (username.length() == 8 && isInteger(username)) {
 
     if (password.equals(adg2_nybruger_textfield.getText())) {
-      //sh.createLogin(username, password);
+      if (server) sh.createUser(int(username), password);
 
       nybruger_final_label.setText("");
       nybruger_window.setVisible(false);

@@ -63,16 +63,17 @@ class ServerHandler {
 
         //cinemas test
         String[] cinemas = message.split(";");
+        biograf_dropList.setItems(cinemas, biograf_dropList.getSelectedIndex());
         //for (int i = 0; i < cinemas.length; i++) {
         //  //message.split(",");
         //}
-        if (biograf_dropList.hasFocus() && !updated) {
-          biograf_dropList.setItems(cinemas, biograf_dropList.getSelectedIndex());
-          updated = true;
-        }
-        if (!biograf_dropList.hasFocus()) {
-          updated = false;
-        }
+        //if (biograf_dropList.hasFocus() && !updated) {
+        //  biograf_dropList.setItems(cinemas, biograf_dropList.getSelectedIndex());
+        //  updated = true;
+        //}
+        //if (!biograf_dropList.hasFocus()) {
+        //  updated = false;
+        //}
       }
     }
     catch (IOException e) {
