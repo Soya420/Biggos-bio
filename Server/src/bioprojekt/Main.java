@@ -11,29 +11,20 @@ import bioprojekt.ui.Applet;
 
 public class Main {
 	public static Server server;
-	public static SQLHandler sqlh;
 	public static Applet applet;
 	
 	public static void main(String[] args) throws Exception {
 		
 		SwingUtilities.invokeLater(() -> applet = new Applet());
 		
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
-		}
-		
 		server = new Server();
-		
-		sqlh = new SQLHandler();
 		
 		
 	}
 	
 	public static void exit() {
-		if (sqlh != null) {
-			sqlh.close();
+		if (applet.getSQLHandler() != null) {
+			applet.getSQLHandler().close();
 		}
 		System.exit(0);
 	}

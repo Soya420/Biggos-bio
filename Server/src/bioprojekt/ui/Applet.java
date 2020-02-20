@@ -15,15 +15,14 @@ import javax.swing.UnsupportedLookAndFeelException;
 import bioprojekt.Main;
 import bioprojekt.database.SQLHandler;
 
+@SuppressWarnings("serial")
 public class Applet extends JFrame {
 	
-	public static final Dimension DEFAULT_PAGE_DIMENSION = new Dimension(800, 800);
+	public static final Dimension DEFAULT_PAGE_DIMENSION = new Dimension(800, 400);
 	
 	// Uses a JTabbedPane as container, to enable multiple menus.
 	private JTabbedPane contentPane;
-	public SQLHandler sqlh;
-	
-	// this has IO streams that need closing, therefore we need to save it
+	private SQLHandler sqlh;
 	
 	public Applet() {
 		super("Server / Admin Tool");
@@ -46,17 +45,17 @@ public class Applet extends JFrame {
 			}
 		});
 		
-		setLocation(400, 200);
+		setLocation(0, 0);
 		
 		contentPane = new JTabbedPane();
 		
 		setContentPane(contentPane);
 		
 		// adds null as text because custom tabs later
-		contentPane.addTab(null, new AddMenu());
+		contentPane.addTab(null, new ManageMenu());
 		
 		// Custom tabs
-		contentPane.setTabComponentAt(0, getTabLabel("Add menu"));
+		contentPane.setTabComponentAt(0, getTabLabel("Manage menu"));
 		
 		pack();
 		setVisible(true);
@@ -67,5 +66,8 @@ public class Applet extends JFrame {
 		JLabel tabLabel = new JLabel(tabText, SwingConstants.CENTER);
 		tabLabel.setPreferredSize(new Dimension(80, 12));
 		return tabLabel;
+	}
+	public SQLHandler getSQLHandler() {
+		return sqlh;
 	}
 }

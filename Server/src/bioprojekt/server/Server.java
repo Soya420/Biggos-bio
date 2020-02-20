@@ -77,7 +77,7 @@ public class Server implements Runnable, Closeable{
 		case("g"):
 			switch(args[1]) {
 			case("cinemas"):
-				Vector<Cinema> cinemas = Main.sqlh.getAllCinemas();
+				Vector<Cinema> cinemas = Main.applet.getSQLHandler().getAllCinemas();
 			String cResponse = "";
 			for(Cinema c: cinemas) {
 				cResponse += c.name + "," + c.id + ";";
