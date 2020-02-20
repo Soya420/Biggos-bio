@@ -57,7 +57,7 @@ public class ManageMenu extends JPanel {
 			add(addCinemaField);
 			
 			addButton = new JButton();
-			
+			hej
 		}
 		
 	}
