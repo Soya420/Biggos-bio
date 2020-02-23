@@ -78,6 +78,7 @@ class ServerHandler {
     finally {
       try {
         br.close();
+        ps.close();
       }
       catch (IOException e) {
         e.printStackTrace();
