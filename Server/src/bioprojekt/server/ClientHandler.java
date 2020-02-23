@@ -37,6 +37,8 @@ public class ClientHandler implements Runnable, Closeable {
 				BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				PrintStream ps = new PrintStream(socket.getOutputStream());
 				){
+			
+			ps.println("You have connected!");
 
 			while(!server.getStop()) {
 				
@@ -46,6 +48,7 @@ public class ClientHandler implements Runnable, Closeable {
 					continue;
 				}
 				String response = server.handleMessage(strLine);
+				System.out.println(response);
 				ps.println(response);
 			}
 
