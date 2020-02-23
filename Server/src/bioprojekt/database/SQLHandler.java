@@ -86,6 +86,10 @@ public class SQLHandler {
 	public Vector<Hall> getAllHalls() throws SQLException {
 		return ResultSetHelper.toHalls(executeQ("SELECT * FROM cinema.cinema;"));
 	}
+	
+	public Vector<Hall> getHallsFromCinema(Cinema c) throws SQLException {
+		return ResultSetHelper.toHalls(executeQ("SELECT * FROM cinema.cinema;"));
+	}
 
 	public void addHall(Hall h) throws SQLException {
 		if (h.id == -1) {

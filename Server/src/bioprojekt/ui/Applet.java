@@ -18,7 +18,7 @@ import bioprojekt.database.SQLHandler;
 @SuppressWarnings("serial")
 public class Applet extends JFrame {
 	
-	public static final Dimension DEFAULT_PAGE_DIMENSION = new Dimension(400, 300);
+	public static final Dimension DEFAULT_PAGE_DIMENSION = new Dimension(400, 400);
 	
 	// Uses a JTabbedPane as container, to enable multiple menus.
 	private JTabbedPane contentPane;
