@@ -56,8 +56,10 @@ class ServerHandler {
 
   void handleMessages() {
     String message;
+    br = null;
     
     try { //<>//
+      br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
       println("test1");
       if ((message = br.readLine()) != null) {
         println("test2");
