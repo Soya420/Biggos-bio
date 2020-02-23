@@ -1,5 +1,6 @@
 import g4p_controls.*;
 import java.awt.*;
+
 Hall hall;
 ServerHandler sh;
 boolean updated;
@@ -11,7 +12,6 @@ public void setup() {
   customGUI();
   if (server) {
     sh = new ServerHandler();
-    //sh.getData("");
   }
   rectMode(CENTER);
   textAlign(CENTER, TOP);
@@ -25,6 +25,7 @@ public void draw() {
   hall.display();
   if (server) sh.handleMessages();
   updateGUI();
+  println("f: "+frameCount);
 }
 
 void keyPressed() {

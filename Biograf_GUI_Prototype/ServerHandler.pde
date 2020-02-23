@@ -56,28 +56,30 @@ class ServerHandler {
 
   void handleMessages() {
     String message;
-
-    try {
-      while ((message = br.readLine()) != null) {
+    
+    try { //<>//
+      println("test1");
+      if ((message = br.readLine()) != null) {
+        println("test2");
         println(message);
 
-        //cinemas test
-        String[] cinemas = message.split(";");
-        biograf_dropList.setItems(cinemas, biograf_dropList.getSelectedIndex());
-        //for (int i = 0; i < cinemas.length; i++) {
-        //  //message.split(",");
-        //}
-        //if (biograf_dropList.hasFocus() && !updated) {
-        //  biograf_dropList.setItems(cinemas, biograf_dropList.getSelectedIndex());
-        //  updated = true;
-        //}
-        //if (!biograf_dropList.hasFocus()) {
-        //  updated = false;
-        //}
+
+        ////cinemas test
+        //String[] cinemas = message.split(";");
+        //biograf_dropList.setItems(cinemas, biograf_dropList.getSelectedIndex());
       }
+      println("test3");
     }
     catch (IOException e) {
       e.printStackTrace();
+    }
+    finally {
+      try {
+        br.close();
+      }
+      catch (IOException e) {
+        e.printStackTrace();
+      }
     }
   }
 }
