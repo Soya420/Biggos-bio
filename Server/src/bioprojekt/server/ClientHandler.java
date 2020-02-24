@@ -53,7 +53,7 @@ public class ClientHandler implements Runnable, Closeable {
 			}
 
 		} catch (IOException e) {
-			System.out.println("Client " + clientHandlerNumber + 1 + " disconnected");
+			System.out.println("Client " + clientHandlerNumber + " disconnected");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
