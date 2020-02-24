@@ -1,4 +1,4 @@
-import java.net.Socket;
+import java.net.Socket; //<>//
 import java.io.*;
 
 class ServerHandler {
@@ -32,26 +32,33 @@ class ServerHandler {
     data += table;
 
     ps.println(data);
-    
-    
+
+
     //respons
     String message;
-    
+
     try {
       while ((message = br.readLine()) == null) {
         //venter på respons
       }
-      
-      while ((message = br.readLine()) != null) {
-        println(message);
 
-        ////cinemas test
-        //String[] cinemas = message.split(";");
-        //biograf_dropList.setItems(cinemas, biograf_dropList.getSelectedIndex());
-      }
+      println(message);
+
+      ////cinemas test
+      //String[] cinemas = message.split(";");
+      //biograf_dropList.setItems(cinemas, biograf_dropList.getSelectedIndex());
     }
     catch (IOException e) {
       e.printStackTrace();
+    }
+    finally {
+      try {
+        ps.close();
+        br.close();
+      }
+      catch(IOException e) {
+        e.printStackTrace();
+      }
     }
   }
 
@@ -73,5 +80,5 @@ class ServerHandler {
     createUser += password;
 
     ps.println(createUser);
-  } //<>//
+  }
 }
