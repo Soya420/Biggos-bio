@@ -53,7 +53,6 @@ class ServerHandler {
     }
     finally {
       try {
-        ps.close();
         br.close();
       }
       catch(IOException e) {
