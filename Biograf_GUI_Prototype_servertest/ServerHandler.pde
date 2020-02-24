@@ -10,7 +10,7 @@ class ServerHandler {
     try {
       socket = new Socket("192.168.43.71", 8777);
       ps = new PrintStream(socket.getOutputStream());
-      br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+      //br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
     catch(IOException e) {
       e.printStackTrace();
@@ -38,6 +38,8 @@ class ServerHandler {
     String message;
 
     try {
+      br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+      
       while ((message = br.readLine()) == null) {
         //venter på respons
       }
