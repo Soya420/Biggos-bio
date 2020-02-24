@@ -11,6 +11,7 @@ import java.util.Vector;
 
 import bioprojekt.Main;
 import bioprojekt.database.Cinema;
+import bioprojekt.database.Hall;
 
 public class Server implements Runnable, Closeable{
 
@@ -85,13 +86,14 @@ public class Server implements Runnable, Closeable{
 			return cResponse;
 
 			case("halls"):
-				
+
 				String hResponse = "";
+			Vector<Hall> halls = Main.applet.getSQLHandler().getHallsFromCinema(new Cinema (args[2]));
 			
-				return hResponse;
+			return hResponse;
 			}
 		case("r"):
-
+			
 			break;
 		case("c"):
 
