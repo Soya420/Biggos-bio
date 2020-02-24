@@ -82,13 +82,17 @@ public class SQLHandler {
 	public void removeAllHallsFromCinema(Cinema c) throws SQLException {
 		execute("DELETE FROM hall WHERE cinema_ID = " + c.id + ";");
 	}
+	
+	public void removeHall(Hall h) throws SQLException {
+		execute("DELETE FROM hall WHERE ID = " + h.id + ";");
+	}
 
 	public Vector<Hall> getAllHalls() throws SQLException {
-		return ResultSetHelper.toHalls(executeQ("SELECT * FROM cinema.cinema;"));
+		return ResultSetHelper.toHalls(executeQ("SELECT * FROM cinema.hall;"));
 	}
 	
 	public Vector<Hall> getHallsFromCinema(Cinema c) throws SQLException {
-		return ResultSetHelper.toHalls(executeQ("SELECT * FROM cinema.cinema;"));
+		return ResultSetHelper.toHalls(executeQ("SELECT * FROM hall WHERE cinema_ID = " + c.id + ";"));
 	}
 
 	public void addHall(Hall h) throws SQLException {

@@ -23,8 +23,9 @@ public static final int NO_ID = -1;
 		this.movie = movie;
 	}
 	
-	void upload() {
-		
+	@Override
+	public String toString() {
+		return "" + id;
 	}
 	
 }
