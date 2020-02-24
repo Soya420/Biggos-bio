@@ -32,6 +32,27 @@ class ServerHandler {
     data += table;
 
     ps.println(data);
+    
+    
+    //respons
+    String message;
+    
+    try {
+      while ((message = br.readLine()) == null) {
+        //venter på respons
+      }
+      
+      while ((message = br.readLine()) != null) {
+        println(message);
+
+        ////cinemas test
+        //String[] cinemas = message.split(";");
+        //biograf_dropList.setItems(cinemas, biograf_dropList.getSelectedIndex());
+      }
+    }
+    catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   void reserve(int username, String password) {
@@ -52,37 +73,5 @@ class ServerHandler {
     createUser += password;
 
     ps.println(createUser);
-  }
-
-  void handleMessages() {
-    String message;
-    //br = null;
-    
-    try { //<>//
-      //br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-      println("test1");
-      while ((message = br.readLine()) != null) {
-        println("test2");
-        println(message);
-
-
-        ////cinemas test
-        //String[] cinemas = message.split(";");
-        //biograf_dropList.setItems(cinemas, biograf_dropList.getSelectedIndex());
-      }
-      println("test3");
-    }
-    catch (IOException e) {
-      e.printStackTrace();
-    }
-    //finally {
-    //  try {
-    //    br.close();
-    //    ps.close();
-    //  }
-    //  catch (IOException e) {
-    //    e.printStackTrace();
-    //  }
-    //}
-  }
+  } //<>//
 }
