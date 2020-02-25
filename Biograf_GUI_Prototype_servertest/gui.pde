@@ -30,7 +30,8 @@ public void reserver_button_click(GButton source, GEvent event) { //_CODE_:reser
 } //_CODE_:reserver_button:502515:
 
 public void film_dropList_click(GDropList source, GEvent event) { //_CODE_:film_dropList:361568:
-  //sh.getData("seats%");
+  println(allHalls[film_dropList.getSelectedIndex()].ID);
+  sh.getData("seats%"+allHalls[film_dropList.getSelectedIndex()].ID);
 } //_CODE_:film_dropList:361568:
 
 public void afbestil_button_click(GButton source, GEvent event) { //_CODE_:afbestil_button:806271:

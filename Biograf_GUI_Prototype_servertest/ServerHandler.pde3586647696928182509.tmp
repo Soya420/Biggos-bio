@@ -92,15 +92,16 @@ class ServerHandler {
 
         if (args.length > 1) {
 
-          currentHall = new Hall(20, 20); //her
-          currentHall.createSeats();
-
-          String[] seats = args[0].split(";");
+          String[] seats = args[1].split(";");
           String[] sValues = splitString(seats);
 
+          currentHall = new Hall(20, 20);
+          currentHall.createSeats();
+
+          println("STUFF");
 
           for (int i = 0; i < seats.length; i++) {
-            currentHall.seats[int(sValues[i*3])][int(sValues[i*3+1])].status = int(sValues[i*3+2]);
+            currentHall.seats[int(sValues[i])][int(sValues[i+1])].status = int(sValues[i+2]);
           }
         }
 

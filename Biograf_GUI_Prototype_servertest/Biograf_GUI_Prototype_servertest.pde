@@ -83,7 +83,7 @@ String[] splitString(String[] s) {
 
     for (int j = 0; j < temp.length; j++) {
       //lægger alle String[] sammen til én
-      split[(i*2)+j] = temp[j];
+      split[(i*t.length)+j] = temp[j];
     }
   }
 

@@ -92,7 +92,7 @@ class ServerHandler {
 
         if (args.length > 1) {
 
-          currentHall = new Hall(20, 20); //her
+          currentHall = new Hall(20, 20);
           currentHall.createSeats();
 
           String[] seats = args[0].split(";");
