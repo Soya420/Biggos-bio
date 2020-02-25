@@ -30,6 +30,7 @@ public void reserver_button_click(GButton source, GEvent event) { //_CODE_:reser
 } //_CODE_:reserver_button:502515:
 
 public void film_dropList_click(GDropList source, GEvent event) { //_CODE_:film_dropList:361568:
+  //sh.getData("seats%");
 } //_CODE_:film_dropList:361568:
 
 public void afbestil_button_click(GButton source, GEvent event) { //_CODE_:afbestil_button:806271:
@@ -37,7 +38,6 @@ public void afbestil_button_click(GButton source, GEvent event) { //_CODE_:afbes
 } //_CODE_:afbestil_button:806271:
 
 public void biograf_dropList_click(GDropList source, GEvent event) { //_CODE_:biograf_dropList:871773:
-  println("dropList1 - GDropList >> GEvent." + event + " @ " + millis());
 } //_CODE_:biograf_dropList:871773:
 
 synchronized public void win_draw2(PApplet appc, GWinData data) { //_CODE_:afbestil_window:889572:
@@ -69,6 +69,8 @@ public void nybruger_button_click(GButton source, GEvent event) { //_CODE_:nybru
 } //_CODE_:nybruger_button:361476:
 
 public void logind_button_click(GButton source, GEvent event) { //_CODE_:logind_button:364978:
+  //reserve("");
+  
   if (1==2) {
     logind_label.setText("");
     logind_window.setVisible(false);
@@ -97,7 +99,7 @@ public void nybruger_final_button_click(GButton source, GEvent event) { //_CODE_
   if (username.length() == 8 && isInteger(username)) {
 
     if (password.equals(adg2_nybruger_textfield.getText())) {
-      if (server) sh.createUser(int(username), password);
+      if (server) sh.createUser(username, password);
 
       nybruger_final_label.setText("");
       nybruger_window.setVisible(false);

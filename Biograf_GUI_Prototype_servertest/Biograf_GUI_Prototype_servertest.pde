@@ -3,7 +3,7 @@ import java.awt.*;
 
 Hall hall;
 ServerHandler sh;
-boolean updated;
+boolean cinemaUpdated, movieUpdated;
 boolean server = true;
 
 public void setup() {
@@ -16,7 +16,7 @@ public void setup() {
   rectMode(CENTER);
   textAlign(CENTER, TOP);
   textSize(35);
-  hall = new Hall(13, 11);
+  hall = new Hall(14, 11);
   hall.createSeats();
 }
 
@@ -24,7 +24,6 @@ public void draw() {
   background(20, 29, 38);
   hall.display();
   updateGUI();
-  println("f: "+frameCount);
 }
 
 void keyPressed() {
@@ -47,12 +46,29 @@ void keyPressed() {
 }
 
 void updateGUI() {
-  if (biograf_dropList.hasFocus() && !updated) {
-    if (server) sh.getData("cinemas");
-    updated = true;
+  //biograf droplist
+  if (biograf_dropList.hasFocus() && !cinemaUpdated) {
+  if (server) sh.getData("cinemas");
+    cinemaUpdated = true;
   }
   if (!biograf_dropList.hasFocus()) {
-    updated = false;
+    cinemaUpdated = false;
+  }
+
+  //film droplist
+  if (film_dropList.hasFocus() && !movieUpdated) {
+
+    if (biograf_dropList.getSelectedText().equals("Biograf")) {
+      
+      String[] error = {"Ingen valgt biograf"};
+      film_dropList.setItems(error, film_dropList.getSelectedIndex());
+      
+    }
+    else if (server) sh.getData("halls%"+(biograf_dropList.getSelectedIndex()+1)+"%"+biograf_dropList.getSelectedText());
+    movieUpdated = true;
+  }
+  if (!film_dropList.hasFocus()) {
+    movieUpdated = false;
   }
 }
 

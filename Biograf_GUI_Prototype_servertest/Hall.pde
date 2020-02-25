@@ -1,4 +1,5 @@
 class Hall {
+  int ID;
   int cols, rows;
   Seat[][] seats;
   Seat[] selected;
