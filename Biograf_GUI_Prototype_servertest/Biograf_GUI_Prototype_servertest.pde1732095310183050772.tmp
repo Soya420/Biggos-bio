@@ -28,6 +28,24 @@ public void draw() {
   updateGUI();
 }
 
+void keyPressed() {
+  if (key == CODED) {
+    switch (keyCode) {
+    case RIGHT:
+      currentHall.right();
+      break;
+    case LEFT:
+      currentHall.left();
+      break;
+    case DOWN:
+      currentHall.down();
+      break;
+    case UP:
+      currentHall.up();
+      break;
+    }
+  }
+}
 
 void updateGUI() {
   //biograf droplist
@@ -46,14 +64,13 @@ void updateGUI() {
 
       String[] error = {"Ingen valgt biograf"};
       film_dropList.setItems(error, film_dropList.getSelectedIndex());
-    } else if (server) sh.getData("halls%"+(allCinemas[biograf_dropList.getSelectedIndex()].ID)+"%"+allCinemas[biograf_dropList.getSelectedIndex()].name);
+    } else if (server) sh.getData("halls%"+(biograf_dropList.getSelectedIndex()+1)+"%"+biograf_dropList.getSelectedText());
     movieUpdated = true;
   }
   if (!film_dropList.hasFocus()) {
     movieUpdated = false;
   }
 }
-
 
 boolean isInteger(String s) {
   //skal være positiv
@@ -73,42 +90,19 @@ boolean isInteger(String s) {
 
 
 String[] splitString(String[] s) {
-  //splitter en for at se hvor mange værdier der er
-  String[] t = s[0].split(",");
-  String[] split = new String[s.length*t.length];
+  String[] splittet = new String[s.length*2];
 
-  
   for (int i = 0; i < s.length; i++) {
     String[] temp = s[i].split(",");
 
     for (int j = 0; j < temp.length; j++) {
-      //lægger alle String[] sammen til én
-      split[(i*2)+j] = temp[j];
+      splittet[i+j] = temp[j];
     }
   }
 
-  return split;
+  return splittet;
 }
 
-
-void keyPressed() {
-  if (key == CODED) {
-    switch (keyCode) {
-    case RIGHT:
-      currentHall.right();
-      break;
-    case LEFT:
-      currentHall.left();
-      break;
-    case DOWN:
-      currentHall.down();
-      break;
-    case UP:
-      currentHall.up();
-      break;
-    }
-  }
-}
 
 public void customGUI() {
   logind_window.setLocation(710, 290);

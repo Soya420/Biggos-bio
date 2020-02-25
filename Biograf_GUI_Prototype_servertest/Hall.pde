@@ -1,8 +1,14 @@
 class Hall {
   int ID;
   int cols, rows;
+  String movie;
   Seat[][] seats;
   Seat[] selected;
+  
+  Hall(String movie_, int ID_) {
+    movie = movie_;
+    ID = ID_;
+  }
 
   Hall(int c, int r) {
     cols = c;

@@ -8,7 +8,8 @@ class ServerHandler {
 
   ServerHandler() {
     try {
-      socket = new Socket("192.168.43.71", 8777);
+      //socket = new Socket("192.168.43.71", 8777);
+      socket = new Socket("127.0.0.1", 8777);
       ps = new PrintStream(socket.getOutputStream());
       br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
@@ -39,37 +40,54 @@ class ServerHandler {
 
       switch(args[0]) {
       case "cinemas":
+        
         //biografer
-        String[] cinemas = args[1].split(";");
-        biograf_dropList.setItems(cinemas, biograf_dropList.getSelectedIndex());
+        if (args.length < 2) {
+          String[] error = {"Ingen biografer"};
+          biograf_dropList.setItems(error, biograf_dropList.getSelectedIndex());
+        } else {
+          String[] cinemas = args[1].split(";");
+          String[] cValues = splitString(cinemas);
+
+          allCinemas = new Cinema[cinemas.length];
+
+          for (int i = 0; i < cValues.length; i += 2) {
+            allCinemas[int(i*0.5)] = new Cinema(cValues[i], int(cValues[i+1]));
+          }
+
+          String[] names = new String[allCinemas.length];
+          for (int i = 0; i < allCinemas.length; i++) {
+            names[i] = allCinemas[i].name;
+          }
+
+          biograf_dropList.setItems(names, biograf_dropList.getSelectedIndex());
+        }
         break;
 
       case "halls":
         //film og sal
+
         if (args.length < 2) {
           String[] error = {"Ingen film i biograf"};
           film_dropList.setItems(error, film_dropList.getSelectedIndex());
         } else {
           String[] halls = args[1].split(";");
+          String[] hValues = splitString(halls);
 
-          String[] hValues = new String[halls.length*2];
-          
-          for (int i = 0; i < halls.length; i++) {
-            String[] s = halls[i].split(",");
-            
-            for (int j = 0; j < s.length; j++) {
-              hValues[i+j] = s[j];
-            }
-          }
-          
-          for (int i = 0; i < hValues.length; i++) {
-            println(hValues[i]);
+          allHalls = new Hall[halls.length];
+
+          for (int i = 0; i < hValues.length; i += 2) {
+            allHalls[int(i*0.5)] = new Hall(hValues[i], int(hValues[i+1]));
           }
 
-          film_dropList.setItems(halls, film_dropList.getSelectedIndex());
+          String[] movies = new String[allHalls.length];
+          for (int i = 0; i < allHalls.length; i++) {
+            movies[i] = allHalls[i].movie;
+          }
 
-          break;
+          film_dropList.setItems(movies, film_dropList.getSelectedIndex());
         }
+        break;
       case "seats":
 
         //currentHall = new Hall(3, 3);
