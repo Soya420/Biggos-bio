@@ -2,8 +2,6 @@ import g4p_controls.*;
 import java.awt.*;
 
 Hall currentHall;
-Hall[] halls;
-Cinema[] cinemas;
 ServerHandler sh;
 boolean cinemaUpdated, movieUpdated;
 boolean server = true;
@@ -66,7 +64,7 @@ void updateGUI() {
       film_dropList.setItems(error, film_dropList.getSelectedIndex());
       
     }
-    else if (server) sh.getData("halls%"+(biograf_dropList.getSelectedIndex()+1)+"%"+biograf_dropList.getSelectedText());
+    else if (server) sh.getData("currentHalls%"+(biograf_dropList.getSelectedIndex()+1)+"%"+biograf_dropList.getSelectedText());
     movieUpdated = true;
   }
   if (!film_dropList.hasFocus()) {

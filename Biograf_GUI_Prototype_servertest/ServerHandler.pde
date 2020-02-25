@@ -72,8 +72,8 @@ class ServerHandler {
         }
       case "seats":
 
-        //hall = new Hall(2, 2);
-        //hall.createSeats();
+        //currentHall = new Hall(3, 3);
+        //currentHall.createSeats();
         break;
       }
     }
