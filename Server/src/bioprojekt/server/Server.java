@@ -13,6 +13,7 @@ import bioprojekt.Main;
 import bioprojekt.database.Cinema;
 import bioprojekt.database.Hall;
 import bioprojekt.database.Reservation;
+import bioprojekt.database.Seat;
 
 public class Server implements Runnable, Closeable{
 
@@ -98,22 +99,27 @@ public class Server implements Runnable, Closeable{
 			case("seats"):
 
 				String sResponse = "seats%";
-
-
+			Vector<Seat> seats = Main.applet.getSQLHandler().getSeatsFromHall(Integer.parseInt(args[2]));
+			for(Seat s: seats) {
+				sResponse +=  s.rNumber + "," + s.cNumber + "," + s.rID + ";";
+			}
+			
+			return sResponse;
 			}
 		case("r"):
 
-			String rResponse = "";
+			String rResponse = "reservation%";
 		Reservation r = Main.applet.getSQLHandler().getLogin(new Reservation(Integer.parseInt(args[1]), args[2]));
 		if (r != null) {
-			Main.applet.getSQLHandler().reserveSeat(r, Integer.parseInt(args[3]));
+			Main.applet.getSQLHandler().reserveSeats(r, Integer.parseInt(args[3]));
+			rResponse += "Reservation made";
 		} else {
 			rResponse += "Wrong login credentials";
 		}
 		return rResponse;
 		case("c"):
 
-			String cResponse = "";
+			String cResponse = "createUser%";
 		if (Main.applet.getSQLHandler().checkLoginValid(new Reservation(Integer.parseInt(args[1]), args[2])) == null) {
 			Main.applet.getSQLHandler().addLogin(new Reservation(Integer.parseInt(args[1]), args[2]));
 			cResponse += "User was created";

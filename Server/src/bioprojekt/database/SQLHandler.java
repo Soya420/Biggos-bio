@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.util.Vector;
 
+import bioprojekt.Main;
 import bioprojekt.util.ResultSetHelper;
 
 public class SQLHandler {
@@ -135,13 +136,20 @@ public class SQLHandler {
 		return null;
 	}
 	
-	public void reserveSeat(Reservation r, int hID) throws SQLException {
-		//execute("INSERT INTO seat VALUES (DEFAULT, " + h.rows + ", " + h.coloumns + ", " + r.id + ", " + h.id + ");");
+	public Hall getHall(int hID) throws SQLException {
+		Vector<Hall> hall = ResultSetHelper.toHalls(executeQ("SELECT * FROM hall WHERE ID = " + hID + ";"));
+		return hall.get(0);
 	}
 	
-	/*public Seat getSeatsFromHall(Hall h) throws SQLException {
-		
-	}*/
+	public void reserveSeats(Reservation r, int hID) throws SQLException {
+		Hall h = getHall(hID);
+		execute("INSERT INTO seat VALUES (DEFAULT, " + h.rows + ", " + h.coloumns + ", " + r.id + ", " + h.id + ");");
+	}
+	
+	public Vector<Seat> getSeatsFromHall(int hID) throws SQLException {
+		Hall h = getHall(hID);
+		return ResultSetHelper.toSeats(executeQ("SELECT * FROM seat WHERE hall_ID = " + h.id + ""));
+	}
 	
 }
 
