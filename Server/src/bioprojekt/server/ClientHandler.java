@@ -38,11 +38,12 @@ public class ClientHandler implements Runnable, Closeable {
 				PrintStream ps = new PrintStream(socket.getOutputStream());
 				){
 			
-			ps.println("You have connected!");
+			//ps.println("You have connected!");
 
 			while(!server.getStop()) {
 				
 				String strLine = br.readLine();
+				System.out.println(strLine);
 				if (strLine == null) {
 					Thread.sleep(100);
 					continue;

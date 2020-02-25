@@ -111,7 +111,37 @@ public class SQLHandler {
 		}
 	}
 	
+	public void addLogin(Reservation r) throws SQLException {
+		execute("INSERT INTO reservation VALUES (DEFAULT, " + r.phoneNumber + ", \"" + r.password + "\");");
+	}
 	
+	public Reservation getLogin(Reservation r) throws SQLException {
+		Vector<Reservation> reservations = ResultSetHelper.toReservations(executeQ("SELECT * FROM reservation;"));
+		for (Reservation res: reservations) {
+			if (r.phoneNumber == res.phoneNumber && r.password == res.password) {
+				return res;
+			}
+		}
+		return null;
+	}
+	
+	public Reservation checkLoginValid(Reservation r) throws SQLException {
+		Vector<Reservation> reservations = ResultSetHelper.toReservations(executeQ("SELECT * FROM reservation;"));
+		for (Reservation res: reservations) {
+			if (r.phoneNumber == res.phoneNumber) {
+				return res;
+			}
+		}
+		return null;
+	}
+	
+	public void reserveSeat(Reservation r, int hID) throws SQLException {
+		//execute("INSERT INTO seat VALUES (DEFAULT, " + h.rows + ", " + h.coloumns + ", " + r.id + ", " + h.id + ");");
+	}
+	
+	/*public Seat getSeatsFromHall(Hall h) throws SQLException {
+		
+	}*/
 	
 }
 

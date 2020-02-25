@@ -12,6 +12,7 @@ import java.util.Vector;
 import bioprojekt.Main;
 import bioprojekt.database.Cinema;
 import bioprojekt.database.Hall;
+import bioprojekt.database.Reservation;
 
 public class Server implements Runnable, Closeable{
 
@@ -72,14 +73,14 @@ public class Server implements Runnable, Closeable{
 	}
 
 	public String handleMessage(String input) throws SQLException {
-		String[] args = input.split(" ");
+		String[] args = input.split("%");
 
 		switch(args[0]) {
 		case("g"):
 			switch(args[1]) {
 			case("cinemas"):
 				Vector<Cinema> cinemas = Main.applet.getSQLHandler().getAllCinemas();
-			String cResponse = "";
+			String cResponse = "cinemas%";
 			for(Cinema c: cinemas) {
 				cResponse += c.name + "," + c.id + ";";
 			}
@@ -87,17 +88,40 @@ public class Server implements Runnable, Closeable{
 
 			case("halls"):
 
-				String hResponse = "";
-			Vector<Hall> halls = Main.applet.getSQLHandler().getHallsFromCinema(new Cinema (args[2]));
-			
+				String hResponse = "halls%";
+			Vector<Hall> halls = Main.applet.getSQLHandler().getHallsFromCinema(new Cinema (Integer.parseInt(args[2]), args[3]));
+			for(Hall h: halls) {
+				hResponse +=  h.movie + "," + h.id + ";";
+			}
 			return hResponse;
+
+			case("seats"):
+
+				String sResponse = "seats%";
+
+
 			}
 		case("r"):
-			
-			break;
+
+			String rResponse = "";
+		Reservation r = Main.applet.getSQLHandler().getLogin(new Reservation(Integer.parseInt(args[1]), args[2]));
+		if (r != null) {
+			Main.applet.getSQLHandler().reserveSeat(r, Integer.parseInt(args[3]));
+		} else {
+			rResponse += "Wrong login credentials";
+		}
+		return rResponse;
 		case("c"):
 
-			break;
+			String cResponse = "";
+		if (Main.applet.getSQLHandler().checkLoginValid(new Reservation(Integer.parseInt(args[1]), args[2])) == null) {
+			Main.applet.getSQLHandler().addLogin(new Reservation(Integer.parseInt(args[1]), args[2]));
+			cResponse += "User was created";
+		} else {
+			cResponse += "Phonenumber already in use";
+		}
+
+		return cResponse;
 		}
 		return "";
 	}
