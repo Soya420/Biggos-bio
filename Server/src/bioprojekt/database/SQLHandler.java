@@ -17,12 +17,12 @@ import bioprojekt.util.ResultSetHelper;
 
 public class SQLHandler {
 	
-	public static final String basicCinemaSearchString = "SELECT id AS \"ID\", k.navn AS \"Name\", k.kemisk_betegnelse AS \"Formel\", k.omkring AS \"Omkring\" FROM kemikalier k WHERE navn LIKE ?;";
+	public static final String addHallString = "INSERT INTO hall VALUES (DEFAULT, ?, ?, ?, ?);";
 	public static final String addCinemaString = "INSERT INTO cinema VALUES (DEFAULT, ? );";
 	
 	
 	private Connection connection;
-	private PreparedStatement basicCinemaSearch, addCinema;
+	private PreparedStatement addHall, addCinema;
 
 	public SQLHandler(){
 		try {
@@ -30,7 +30,7 @@ public class SQLHandler {
 			SQLLogin login = new SQLLogin();
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?verifyServerCertificate=false&useSSL=true", login.getUsername(), login.getPassword());
 			
-			basicCinemaSearch = connection.prepareStatement(basicCinemaSearchString);
+			addHall = connection.prepareStatement(addHallString);
 			addCinema = connection.prepareStatement(addCinemaString);
 			
 		}catch(FileNotFoundException e) {
@@ -96,10 +96,18 @@ public class SQLHandler {
 	}
 
 	public void addHall(Hall h) throws SQLException {
-		if (h.id == -1) {
-			execute("INSERT INTO hall VALUES (DEFAULT, " + h.rows + ", " + h.coloumns + ", " + h.cinemaID + ", \"" + h.movie + "\");");
-		} else {
-			execute("INSERT INTO hall VALUES (" + h.id + ", " + h.rows + ", " + h.coloumns + ", " + h.cinemaID + " \"" + h.movie + "\");");
+		synchronized(addHall) {
+			String movie = h.movie;
+			int rows = h.rows;
+			int coloumns = h.coloumns;
+			int cID = h.cinemaID;
+			
+
+			addHall.setInt(1, rows);
+			addHall.setInt(2, coloumns);
+			addHall.setInt(3, cID);
+			addHall.setString(4, movie);
+			addHall.execute();
 		}
 	}
 	
