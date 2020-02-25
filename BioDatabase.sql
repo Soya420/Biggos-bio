@@ -29,7 +29,11 @@ PRIMARY KEY(rows_number, coloumns_number, hall_ID)
 
 CREATE TABLE reservation(
 ID INT NOT NULL AUTO_INCREMENT,
-phone_number VarChar(15) NOT NULL,
-password VarChar(31) NOT NULL,
+phone_number INT NOT NULL,
+pass_word VarChar(31) NOT NULL,
 PRIMARY KEY(ID)
 );
+
+USE cinema;
+INSERT INTO cinema VALUES (DEFAULT, "Værløse");
+INSERT INTO hall VALUES (DEFAULT, 10, 10, 1, "Frozen 2");
