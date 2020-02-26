@@ -8,8 +8,8 @@ class ServerHandler {
 
   ServerHandler() {
     try {
-      //socket = new Socket("192.168.43.71", 8777);
-      socket = new Socket("127.0.0.1", 8777);
+      socket = new Socket("192.168.43.71", 8777);
+      //socket = new Socket("127.0.0.1", 8777);
       ps = new PrintStream(socket.getOutputStream());
       br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
@@ -95,12 +95,11 @@ class ServerHandler {
 
         if (args.length > 3) {
 
-          String[] seats = args[1].split(";");
+          String[] seats = args[3].split(";");
           String[] sValues = splitString(seats);
 
-
           for (int i = 0; i < seats.length; i++) {
-            currentHall.seats[int(sValues[i*3])][int(sValues[i*3+1])].status = int(sValues[i*3+2]);
+            currentHall.seats[int(sValues[i*3])][int(sValues[i*3+1])].status = 2;
           }
         }
 
@@ -119,12 +118,12 @@ class ServerHandler {
     login += username + "%";
 
     login += password + "%";
-
+    
     login += allHalls[film_dropList.getSelectedIndex()].ID + "%";
 
-    //for (int i = 0; i < currentHall.selected.length; i++) {
-    //  login += currentHall.selected[i].colNum + "," + +currentHall.selected[i].rowNum + ";";
-    //}
+    for (int i = 0; i < currentHall.selected.length; i++) {
+      login += currentHall.selected[i].colNum + "," + +currentHall.selected[i].rowNum + ",";
+    }
 
 
     ps.println(login);
@@ -157,7 +156,7 @@ class ServerHandler {
 
     login += username + "%";
 
-    login += password + "%";
+    login += password;
 
     ps.println(login);
 
@@ -174,8 +173,8 @@ class ServerHandler {
 
       String[] args = message.split("%");
 
-      if (args[0].equals("cancel")) {
-        if (args[1].equals("Cancelation made")) return true;
+      if (args[0].equals("undoReservation")) {
+        if (args[1].equals("Reservation deleted")) return true;
       }
     }
     catch (IOException e) {

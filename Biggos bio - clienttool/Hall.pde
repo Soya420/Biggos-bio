@@ -4,7 +4,7 @@ class Hall {
   String movie;
   Seat[][] seats;
   Seat[] selected;
-  
+
   Hall(String movie_, int ID_) {
     movie = movie_;
     ID = ID_;
@@ -24,12 +24,7 @@ class Hall {
     }
 
     //laver array for valgte sæder
-    selected = new Seat[billetter_dropList.getSelectedIndex()+1];
-
-    for (int i = 0; i < billetter_dropList.getSelectedIndex()+1; i++) {
-      seats[i][0].status = 1;
-      selected[i] = seats[i][0];
-    }
+    findEmptySeats();
   }
 
   void display() {
@@ -53,6 +48,28 @@ class Hall {
     if (selected.length == 1) reserver_label.setText("Række "+(selected[0].rowNum+1)+"\nSæde "+(selected[0].colNum+1));
     else reserver_label.setText("Række "+(selected[0].rowNum+1)+"\nSæde "+(selected[0].colNum+1)+" - "+(selected[selected.length-1].colNum+1));
   }
+
+
+
+  void findEmptySeats() {
+    selected = new Seat[billetter_dropList.getSelectedIndex()+1];
+
+    boolean occupied = true;
+    int x, y;
+    while (occupied) {
+      occupied = false;
+      
+      for (int i = 0; i < billetter_dropList.getSelectedIndex()+1; i++) {
+        if (seats[i][0].status > 1) {
+          occupied = true;
+          selected[i] = seats[i][0];
+        }
+      }
+    }
+    
+    //selected[i] = seats[i][0];
+  }
+
 
 
 

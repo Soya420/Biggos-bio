@@ -44,7 +44,8 @@ synchronized public void win_draw2(PApplet appc, GWinData data) { //_CODE_:afbes
 } //_CODE_:afbestil_window:889572:
 
 public void afbestil_final_button_click(GButton source, GEvent event) { //_CODE_:afbetil_final_button:901157:
-  if (sh.cancel(tlf_logind_textfield.getText(), adg_logind_textfield.getText())) {
+  if (sh.cancel(tlf_afbestil_textfield.getText(), adg_afbestil_textfield.getText())) {
+    sh.getData("seats%"+allHalls[film_dropList.getSelectedIndex()].ID);
     afbestil_final_label.setText("");
     afbestil_window.setVisible(false);
   } else {
@@ -74,6 +75,8 @@ public void nybruger_button_click(GButton source, GEvent event) { //_CODE_:nybru
 
 public void logind_button_click(GButton source, GEvent event) { //_CODE_:logind_button:364978:
   if (sh.reserve(tlf_logind_textfield.getText(), adg_logind_textfield.getText())) {
+    
+    sh.getData("seats%"+allHalls[film_dropList.getSelectedIndex()].ID);
 
     logind_label.setText("");
     logind_window.setVisible(false);
