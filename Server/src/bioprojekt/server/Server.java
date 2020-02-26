@@ -99,6 +99,10 @@ public class Server implements Runnable, Closeable{
 			case("seats"):
 
 				String sResponse = "seats%";
+			
+			Hall h = Main.applet.getSQLHandler().getHall(Integer.parseInt(args[2]));
+			sResponse += h.coloumns + "%" + h.rows + "%";
+			
 			Vector<Seat> seats = Main.applet.getSQLHandler().getSeatsFromHall(Integer.parseInt(args[2]));
 			for(Seat s: seats) {
 				sResponse +=  s.cNumber + "," + s.rNumber + "," + s.rID + ";";

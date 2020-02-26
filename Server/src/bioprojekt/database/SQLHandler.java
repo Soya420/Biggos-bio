@@ -119,10 +119,14 @@ public class SQLHandler {
 	public Reservation getLogin(Reservation r) throws SQLException {
 		Vector<Reservation> reservations = ResultSetHelper.toReservations(executeQ("SELECT * FROM reservation;"));
 		for (Reservation res: reservations) {
-			if (r.phoneNumber == res.phoneNumber && r.password == res.password) {
+			System.out.println(res.phoneNumber);
+			System.out.println(res.password);
+			if (r.phoneNumber == res.phoneNumber && r.password.equals(res.password)) {
 				return res;
 			}
 		}
+		System.out.println(r.phoneNumber);
+		System.out.println(r.password);
 		return null;
 	}
 	
@@ -143,7 +147,7 @@ public class SQLHandler {
 	
 	public void reserveSeats(Reservation r, int hID) throws SQLException {
 		Hall h = getHall(hID);
-		execute("INSERT INTO seat VALUES (DEFAULT, " + h.rows + ", " + h.coloumns + ", " + r.id + ", " + h.id + ");");
+		execute("INSERT INTO seat VALUES (" + h.rows + ", " + h.coloumns + ", " + r.id + ", " + h.id + ");");
 	}
 	
 	public Vector<Seat> getSeatsFromHall(int hID) throws SQLException {

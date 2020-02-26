@@ -90,12 +90,12 @@ class ServerHandler {
         break;
       case "seats":
 
-        currentHall = new Hall(int(args[1]), int(args[2]));
-        currentHall.createSeats();
+        if (args.length > 1) {
 
-        if (args.length > 3) {
+          currentHall = new Hall(20, 20); //her
+          currentHall.createSeats();
 
-          String[] seats = args[1].split(";");
+          String[] seats = args[0].split(";");
           String[] sValues = splitString(seats);
 
 
@@ -112,20 +112,12 @@ class ServerHandler {
     }
   }
 
-
   boolean reserve(String username, String password) {
     String login = new String("r%");
 
     login += username + "%";
 
-    login += password + "%";
-
-    login += allHalls[film_dropList.getSelectedIndex()].ID + "%";
-
-    //for (int i = 0; i < currentHall.selected.length; i++) {
-    //  login += currentHall.selected[i].colNum + "," + +currentHall.selected[i].rowNum + ";";
-    //}
-
+    login += password;
 
     ps.println(login);
 
@@ -152,40 +144,7 @@ class ServerHandler {
     return false;
   }
 
-  boolean cancel(String username, String password) {
-    String login = new String("u%");
-
-    login += username + "%";
-
-    login += password + "%";
-
-    ps.println(login);
-
-
-    //respons
-    String message;
-
-    try {
-      while ((message = br.readLine()) == null) {
-        //venter på respons
-      }
-
-      println(message);
-
-      String[] args = message.split("%");
-
-      if (args[0].equals("cancel")) {
-        if (args[1].equals("Cancelation made")) return true;
-      }
-    }
-    catch (IOException e) {
-      e.printStackTrace();
-    }
-    return false;
-  }
-
-
-  boolean createUser(String username, String password) {
+  void createUser(String username, String password) {
     String createUser = new String("c%");
 
     createUser += username + "%";
@@ -203,16 +162,9 @@ class ServerHandler {
       }
 
       println(message);
-
-      String[] args = message.split("%");
-
-      if (args[0].equals("createUser")) {
-        if (args[1].equals("User was created")) return true;
-      }
     }
     catch (IOException e) {
       e.printStackTrace();
     }
-    return false;
   }
 }
