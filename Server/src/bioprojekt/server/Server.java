@@ -72,24 +72,6 @@ public class Server implements Runnable, Closeable{
 		}
 
 	}
-	
-	public String[] splitString(String[] s) {
-		  //splitter en for at se hvor mange værdier der er
-		  String[] t = s[0].split(",");
-		  String[] split = new String[s.length*t.length];
-
-
-		  for (int i = 0; i < s.length; i++) {
-		    String[] temp = s[i].split(",");
-
-		    for (int j = 0; j < temp.length; j++) {
-		      //lægger alle String[] sammen til én
-		      split[(i*t.length)+j] = temp[j];
-		    }
-		  }
-
-		  return split;
-		}
 
 	public String handleMessage(String input) throws SQLException {
 		String[] args = input.split("%");
@@ -133,7 +115,7 @@ public class Server implements Runnable, Closeable{
 			String rResponse = "reservation%";
 		Reservation r = Main.applet.getSQLHandler().getLogin(new Reservation(Integer.parseInt(args[1]), args[2]));
 		if (r != null) {
-			Main.applet.getSQLHandler().reserveSeats(r, Integer.parseInt(args[3]));
+			Main.applet.getSQLHandler().reserveSeats(r, Integer.parseInt(args[3]), args[4]);
 			rResponse += "Reservation made";
 		} else {
 			rResponse += "Wrong login credentials";
@@ -150,6 +132,13 @@ public class Server implements Runnable, Closeable{
 		}
 
 		return cResponse;
+		case("u"):
+			
+			String uResponse = "undoReservation%Reservation deleted";
+		Main.applet.getSQLHandler().deleteReservation(new Reservation(Integer.parseInt(args[1]), args[2]));
+		
+		
+		return uResponse;
 		}
 		return "";
 	}

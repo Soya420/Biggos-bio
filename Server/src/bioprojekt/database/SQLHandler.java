@@ -17,11 +17,11 @@ import bioprojekt.Main;
 import bioprojekt.util.ResultSetHelper;
 
 public class SQLHandler {
-	
+
 	public static final String addHallString = "INSERT INTO hall VALUES (DEFAULT, ?, ?, ?, ?);";
 	public static final String addCinemaString = "INSERT INTO cinema VALUES (DEFAULT, ? );";
-	
-	
+
+
 	private Connection connection;
 	private PreparedStatement addHall, addCinema;
 
@@ -30,10 +30,10 @@ public class SQLHandler {
 			Class.forName("com.mysql.jdbc.Driver");
 			SQLLogin login = new SQLLogin();
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?verifyServerCertificate=false&useSSL=true", login.getUsername(), login.getPassword());
-			
+
 			addHall = connection.prepareStatement(addHallString);
 			addCinema = connection.prepareStatement(addCinemaString);
-			
+
 		}catch(FileNotFoundException e) {
 			System.out.println("Could't find login file");
 		}catch(SQLException | IOException | ClassNotFoundException e) {
@@ -79,11 +79,11 @@ public class SQLHandler {
 	public void removeCinema(Cinema c) throws SQLException {
 		execute("DELETE FROM cinema WHERE ID = " + c.id + ";");
 	}
-	
+
 	public void removeAllHallsFromCinema(Cinema c) throws SQLException {
 		execute("DELETE FROM hall WHERE cinema_ID = " + c.id + ";");
 	}
-	
+
 	public void removeHall(Hall h) throws SQLException {
 		execute("DELETE FROM hall WHERE ID = " + h.id + ";");
 	}
@@ -91,7 +91,7 @@ public class SQLHandler {
 	public Vector<Hall> getAllHalls() throws SQLException {
 		return ResultSetHelper.toHalls(executeQ("SELECT * FROM cinema.hall;"));
 	}
-	
+
 	public Vector<Hall> getHallsFromCinema(Cinema c) throws SQLException {
 		return ResultSetHelper.toHalls(executeQ("SELECT * FROM hall WHERE cinema_ID = " + c.id + ";"));
 	}
@@ -102,7 +102,7 @@ public class SQLHandler {
 			int rows = h.rows;
 			int coloumns = h.coloumns;
 			int cID = h.cinemaID;
-			
+
 
 			addHall.setInt(1, rows);
 			addHall.setInt(2, coloumns);
@@ -111,25 +111,25 @@ public class SQLHandler {
 			addHall.execute();
 		}
 	}
-	
+
 	public void addLogin(Reservation r) throws SQLException {
 		execute("INSERT INTO reservation VALUES (DEFAULT, " + r.phoneNumber + ", \"" + r.password + "\");");
 	}
-	
+
 	public Reservation getLogin(Reservation r) throws SQLException {
 		Vector<Reservation> reservations = ResultSetHelper.toReservations(executeQ("SELECT * FROM reservation;"));
 		for (Reservation res: reservations) {
-			System.out.println(res.phoneNumber);
-			System.out.println(res.password);
+			//System.out.println(res.phoneNumber);
+			//System.out.println(res.password);
 			if (r.phoneNumber == res.phoneNumber && r.password.equals(res.password)) {
 				return res;
 			}
 		}
-		System.out.println(r.phoneNumber);
-		System.out.println(r.password);
+		//System.out.println(r.phoneNumber);
+		//System.out.println(r.password);
 		return null;
 	}
-	
+
 	public Reservation checkLoginValid(Reservation r) throws SQLException {
 		Vector<Reservation> reservations = ResultSetHelper.toReservations(executeQ("SELECT * FROM reservation;"));
 		for (Reservation res: reservations) {
@@ -139,22 +139,33 @@ public class SQLHandler {
 		}
 		return null;
 	}
-	
+
 	public Hall getHall(int hID) throws SQLException {
 		Vector<Hall> hall = ResultSetHelper.toHalls(executeQ("SELECT * FROM hall WHERE ID = " + hID + ";"));
 		return hall.get(0);
 	}
-	
-	public void reserveSeats(Reservation r, int hID) throws SQLException {
+
+	public void reserveSeats(Reservation r, int hID, String seats) throws SQLException {
 		Hall h = getHall(hID);
-		execute("INSERT INTO seat VALUES (" + h.rows + ", " + h.coloumns + ", " + r.id + ", " + h.id + ");");
+		
+		String[] args = seats.split(",");
+		for(int i = 0; i < args.length*0.5; i++) {
+			execute("INSERT INTO seat VALUES (" + Integer.parseInt(args[(i*2)+1]) + ", " + Integer.parseInt(args[i*2]) + ", " + r.id + ", " + h.id + ");");
+		}
+		
+		
 	}
-	
+
 	public Vector<Seat> getSeatsFromHall(int hID) throws SQLException {
 		Hall h = getHall(hID);
 		return ResultSetHelper.toSeats(executeQ("SELECT * FROM seat WHERE hall_ID = " + h.id + ""));
 	}
 	
+	public void deleteReservation(Reservation r) throws SQLException {
+		Reservation res = getLogin(r);
+		execute("DELETE FROM seat WHERE reservation_ID = " + res.id + ";");
+		
+	}
 }
 
 class SQLLogin {
