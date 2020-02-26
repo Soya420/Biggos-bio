@@ -72,6 +72,24 @@ public class Server implements Runnable, Closeable{
 		}
 
 	}
+	
+	public String[] splitString(String[] s) {
+		  //splitter en for at se hvor mange værdier der er
+		  String[] t = s[0].split(",");
+		  String[] split = new String[s.length*t.length];
+
+
+		  for (int i = 0; i < s.length; i++) {
+		    String[] temp = s[i].split(",");
+
+		    for (int j = 0; j < temp.length; j++) {
+		      //lægger alle String[] sammen til én
+		      split[(i*t.length)+j] = temp[j];
+		    }
+		  }
+
+		  return split;
+		}
 
 	public String handleMessage(String input) throws SQLException {
 		String[] args = input.split("%");
