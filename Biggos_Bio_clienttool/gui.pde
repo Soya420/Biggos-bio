@@ -15,14 +15,6 @@
  */
 
 public void billetter_dropList_click(GDropList source, GEvent event) { //_CODE_:billetter_dropList:237351:
-  for (int i = 0; i < currentHall.selected.length; i++) if (currentHall.selected[i].status == 1) {
-    currentHall.selected[i].status = 0;
-  }
-  currentHall.selected = new Seat[billetter_dropList.getSelectedIndex()+1];
-  for (int i = 0; i < currentHall.selected.length; i++) {
-    currentHall.seats[i][0].status = 1;
-    currentHall.selected[i] = currentHall.seats[i][0];
-  }
 } //_CODE_:billetter_dropList:237351:
 
 public void reserver_button_click(GButton source, GEvent event) { //_CODE_:reserver_button:502515:
@@ -152,6 +144,7 @@ public void createGUI(){
   afbestil_label.setOpaque(false);
   reserver_label = new GLabel(this, 10, 530, 250, 80);
   reserver_label.setTextAlign(GAlign.CENTER, GAlign.BOTTOM);
+  reserver_label.setText("Ingen film valgt");
   reserver_label.setLocalColorScheme(GCScheme.SCHEME_10);
   reserver_label.setOpaque(false);
   biograf_dropList = new GDropList(this, 40, 10, 190, 200, 3, 30);

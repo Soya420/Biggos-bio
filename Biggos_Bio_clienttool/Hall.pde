@@ -1,4 +1,4 @@
-class Hall {
+class Hall { //<>//
   int ID;
   int cols, rows;
   String movie;
@@ -22,9 +22,6 @@ class Hall {
     for (int i = 0; i < cols; i++) for (int j = 0; j < rows; j++) {
       seats[i][j] = new Seat(i, j, wid, hei);
     }
-
-    //laver array for valgte sæder
-    findEmptySeats();
   }
 
   void display() {
@@ -45,29 +42,55 @@ class Hall {
     text("LÆRRED", 640, 20);
 
     //label
-    if (selected.length == 1) reserver_label.setText("Række "+(selected[0].rowNum+1)+"\nSæde "+(selected[0].colNum+1));
-    else reserver_label.setText("Række "+(selected[0].rowNum+1)+"\nSæde "+(selected[0].colNum+1)+" - "+(selected[selected.length-1].colNum+1));
+    if (selected != null) {
+      if (selected.length == 1) reserver_label.setText("Række "+(selected[0].rowNum+1)+"\nSæde "+(selected[0].colNum+1));
+      else reserver_label.setText("Række "+(selected[0].rowNum+1)+"\nSæde "+(selected[0].colNum+1)+" - "+(selected[selected.length-1].colNum+1));
+    } else {
+      reserver_label.setText("Ingen ledige pladser ved siden af hinanden");
+    }
   }
 
 
 
   void findEmptySeats() {
-    selected = new Seat[billetter_dropList.getSelectedIndex()+1];
 
     boolean occupied = true;
-    int x, y;
+    int x = -1, y = 0;
+
     while (occupied) {
       occupied = false;
-      
-      for (int i = 0; i < billetter_dropList.getSelectedIndex()+1; i++) {
-        if (seats[i][0].status > 1) {
+
+
+      if (x < cols-billetter_dropList.getSelectedIndex()-1 && y < rows-1) {
+        x++;
+      } else {
+        x = 0;
+        if (y < rows-1) {
+          y++;
+        } else {
           occupied = true;
-          selected[i] = seats[i][0];
+          break;
+        }
+      }
+
+      for (int i = 0; i < billetter_dropList.getSelectedIndex()+1; i++) {
+        if (seats[x+i][y].status > 1) {
+          occupied = true;
+          break;
         }
       }
     }
-    
-    //selected[i] = seats[i][0];
+
+    if (!occupied) {
+      selected = new Seat[billetter_dropList.getSelectedIndex()+1];
+
+      for (int i = 0; i < billetter_dropList.getSelectedIndex()+1; i++) {
+        seats[x+i][y].status = 1;
+        selected[i] = seats[x+i][y];
+      }
+    } else {
+      reserver_label.setText("Ingen ledige pladser");
+    }
   }
 
 

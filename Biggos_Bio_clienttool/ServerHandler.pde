@@ -8,8 +8,8 @@ class ServerHandler {
 
   ServerHandler() {
     try {
-      socket = new Socket("192.168.43.71", 8777);
-      //socket = new Socket("127.0.0.1", 8777);
+      //socket = new Socket("192.168.43.71", 8777);
+      socket = new Socket("127.0.0.1", 8777);
       ps = new PrintStream(socket.getOutputStream());
       br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
@@ -99,9 +99,20 @@ class ServerHandler {
           String[] sValues = splitString(seats);
 
           for (int i = 0; i < seats.length; i++) {
-            currentHall.seats[int(sValues[i*3])][int(sValues[i*3+1])].status = 2;
+            currentHall.seats[int(sValues[i*2])][int(sValues[i*2+1])].status = 2;
           }
         }
+
+        //G4P laver en bug hvis man scroller i droplisten
+        //så den skal kun opdatere hvis den ikke er blevet kaldt fra billet droplisten
+        if (seatsUpdated) {
+          String[] tickets = new String[currentHall.cols];
+          for (int i = 0; i < tickets.length; i++) tickets[i] = (i+1)+"";
+
+          billetter_dropList.setItems(tickets, 0);
+        }
+
+        currentHall.findEmptySeats();
 
         break;
       }
@@ -118,7 +129,7 @@ class ServerHandler {
     login += username + "%";
 
     login += password + "%";
-    
+
     login += allHalls[film_dropList.getSelectedIndex()].ID + "%";
 
     for (int i = 0; i < currentHall.selected.length; i++) {
