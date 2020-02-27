@@ -216,7 +216,7 @@ public class ManageMenu extends JPanel {
 				ccb.setSelectedItem(null);
 			}
 			add(ccb);
-			
+
 
 			rowsLabel = new JLabel("Rows#:");
 			layout.putConstraint(SpringLayout.NORTH, rowsLabel, 5, SpringLayout.SOUTH, ccb);
@@ -267,22 +267,46 @@ public class ManageMenu extends JPanel {
 			layout.putConstraint(SpringLayout.EAST, addButton, 100, SpringLayout.WEST, this);
 
 			addButton.addActionListener(e -> {
-				try {
-					hallRows = Integer.parseInt(rowsField.getText());
-					hallColoumns = Integer.parseInt(coloumnsField.getText());
-					selected = (Cinema) ccb.getSelectedItem();
-					String filmNavn = filmField.getText();
-					Main.applet.getSQLHandler().addHall(new Hall(hallRows, hallColoumns, selected.id, filmNavn));
-					rowsField.setText("");
-					coloumnsField.setText("");
-					filmField.setText("");
-					ccb.setSelectedItem(null);
-				} catch (SQLException e1) {
-					e1.printStackTrace();
+				if (isInteger(rowsField.getText()) && isInteger(coloumnsField.getText()) && (Cinema) ccb.getSelectedItem() != null)  {
+					System.out.println("integer");
+					try {
+						hallRows = Integer.parseInt(rowsField.getText());
+						hallColoumns = Integer.parseInt(coloumnsField.getText());
+
+						selected = (Cinema) ccb.getSelectedItem();
+						String filmNavn = filmField.getText();
+						Main.applet.getSQLHandler().addHall(new Hall(hallRows, hallColoumns, selected.id, filmNavn));
+						rowsField.setText("");
+						coloumnsField.setText("");
+						filmField.setText("");
+						ccb.setSelectedItem(null);
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else {
+					System.out.println("Error wrong output");
 				}
 			});
 
 			add(addButton);
+		}
+
+		public boolean isInteger(String s) {
+			if (s.length() == 0) return false;
+
+			//skal være positiv
+			if (s.charAt(0) == '-') return false;
+
+			try {
+				if (Integer.parseInt(s) == 0) return false;
+			} 
+			catch(NumberFormatException e) { 
+				return false;
+			} 
+			catch(NullPointerException e) {
+				return false;
+			}
+			return true;
 		}
 
 	}
@@ -325,20 +349,20 @@ public class ManageMenu extends JPanel {
 			layout.putConstraint(SpringLayout.SOUTH, hccb, 24, SpringLayout.NORTH, hccb);
 			layout.putConstraint(SpringLayout.WEST, hccb, 5, SpringLayout.WEST, this);
 			layout.putConstraint(SpringLayout.EAST, hccb, 150, SpringLayout.WEST, this);
-			
+
 			ccb.addPopupMenuListener(new PopupMenuListener() {
-				
+
 				@Override
 				public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
 				}
-				
+
 				@Override
 				public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
 					try {
 						if (ccb.getSelectedItem() != null) {
 
 							hccb.updateModel(Main.applet.getSQLHandler().getHallsFromCinema((Cinema) ccb.getSelectedItem()));
-							
+
 
 						} else {
 							hccb.updateModel(Main.applet.getSQLHandler().getAllHalls());
@@ -346,14 +370,14 @@ public class ManageMenu extends JPanel {
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
-					
+
 				}
-				
+
 				@Override
 				public void popupMenuCanceled(PopupMenuEvent e) {
 				}
 			});
-			
+
 			add(hccb);
 
 			removeButton = new JButton("Remove hall");
