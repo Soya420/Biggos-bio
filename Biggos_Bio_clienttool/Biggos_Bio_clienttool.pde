@@ -107,6 +107,15 @@ String[] splitString(String[] s) {
 }
 
 
+boolean containsIllegalChar(String s) {
+  for (int i = 0; i < s.length(); i++) {
+    if (s.charAt(i) == '%' || s.charAt(i) == ',' || s.charAt(i) == '"') return true;
+  }
+  
+  return false;
+}
+
+
 void keyPressed() {
   if (key == CODED && !reserver_label.getText().equals("Ingen ledige pladser ved siden af hinanden")) {
     switch (keyCode) {
