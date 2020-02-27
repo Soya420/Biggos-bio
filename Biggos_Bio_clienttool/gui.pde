@@ -66,14 +66,19 @@ public void nybruger_button_click(GButton source, GEvent event) { //_CODE_:nybru
 } //_CODE_:nybruger_button:361476:
 
 public void logind_button_click(GButton source, GEvent event) { //_CODE_:logind_button:364978:
-  if (sh.reserve(tlf_logind_textfield.getText(), adg_logind_textfield.getText())) {
-    
-    sh.getData("seats%"+allHalls[film_dropList.getSelectedIndex()].ID);
+  if (!reserver_label.getText().equals("Ingen ledige pladser ved siden af hinanden")) {
+    if (sh.reserve(tlf_logind_textfield.getText(), adg_logind_textfield.getText())) {
 
-    logind_label.setText("");
-    logind_window.setVisible(false);
+      sh.getData("seats%"+allHalls[film_dropList.getSelectedIndex()].ID);
+
+      logind_label.setText("");
+      logind_window.setVisible(false);
+
+    } else {
+      logind_label.setText("Forkert brugernavn eller adgangskode");
+    }
   } else {
-    logind_label.setText("Forkert brugernavn eller adgangskode");
+    logind_label.setText("Ingen ledige sæder ved siden af hinanden");
   }
 } //_CODE_:logind_button:364978:
 
