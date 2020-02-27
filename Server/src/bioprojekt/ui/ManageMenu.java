@@ -127,11 +127,15 @@ public class ManageMenu extends JPanel {
 			layout.putConstraint(SpringLayout.EAST, addButton, 100, SpringLayout.WEST, this);
 
 			addButton.addActionListener(e -> {
-				try {
-					Main.applet.getSQLHandler().addCinema(new Cinema(addCinemaField.getText()));
-					addCinemaField.setText("");
-				} catch (SQLException e1) {
-					e1.printStackTrace();
+				if(!addCinemaField.getText().isBlank()) {
+					try {
+						Main.applet.getSQLHandler().addCinema(new Cinema(addCinemaField.getText()));
+						addCinemaField.setText("");
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else {
+					System.out.println("Error: Wrong input");
 				}
 			});
 
@@ -171,12 +175,17 @@ public class ManageMenu extends JPanel {
 			layout.putConstraint(SpringLayout.EAST, removeButton, 100, SpringLayout.WEST, this);
 
 			removeButton.addActionListener(e -> {
-				try {
-					Main.applet.getSQLHandler().removeAllHallsFromCinema((Cinema) ccb.getSelectedItem());
-					Main.applet.getSQLHandler().removeCinema((Cinema) ccb.getSelectedItem());
-					ccb.setSelectedItem(null);
-				} catch (SQLException e1) {
-					e1.printStackTrace();
+				if(ccb.getSelectedItem() != null) {
+					try {
+						
+						Main.applet.getSQLHandler().removeAllHallsFromCinema((Cinema) ccb.getSelectedItem());
+						Main.applet.getSQLHandler().removeCinema((Cinema) ccb.getSelectedItem());
+						ccb.setSelectedItem(null);
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				} else {
+					System.out.println("Error: Wrong input");
 				}
 			});
 
@@ -267,8 +276,7 @@ public class ManageMenu extends JPanel {
 			layout.putConstraint(SpringLayout.EAST, addButton, 100, SpringLayout.WEST, this);
 
 			addButton.addActionListener(e -> {
-				if (isInteger(rowsField.getText()) && isInteger(coloumnsField.getText()) && (Cinema) ccb.getSelectedItem() != null)  {
-					System.out.println("integer");
+				if (isInteger(rowsField.getText()) && isInteger(coloumnsField.getText()) && ccb.getSelectedItem() != null)  {
 					try {
 						hallRows = Integer.parseInt(rowsField.getText());
 						hallColoumns = Integer.parseInt(coloumnsField.getText());
@@ -284,7 +292,7 @@ public class ManageMenu extends JPanel {
 						e1.printStackTrace();
 					}
 				} else {
-					System.out.println("Error wrong output");
+					System.out.println("Error: Wrong input");
 				}
 			});
 
@@ -379,6 +387,34 @@ public class ManageMenu extends JPanel {
 			});
 
 			add(hccb);
+			
+			hccb.addPopupMenuListener(new PopupMenuListener() {
+
+				@Override
+				public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+					try {
+						if (ccb.getSelectedItem() != null) {
+
+							hccb.updateModel(Main.applet.getSQLHandler().getHallsFromCinema((Cinema) ccb.getSelectedItem()));
+
+
+						} else {
+							hccb.updateModel(Main.applet.getSQLHandler().getAllHalls());
+						}
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
+
+				@Override
+				public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+
+				}
+
+				@Override
+				public void popupMenuCanceled(PopupMenuEvent e) {
+				}
+			});
 
 			removeButton = new JButton("Remove hall");
 			layout.putConstraint(SpringLayout.NORTH, removeButton, 10, SpringLayout.SOUTH, hccb);
@@ -387,12 +423,16 @@ public class ManageMenu extends JPanel {
 			layout.putConstraint(SpringLayout.EAST, removeButton, 100, SpringLayout.WEST, this);
 
 			removeButton.addActionListener(e -> {
-				try {
-					Main.applet.getSQLHandler().removeHall((Hall) hccb.getSelectedItem());
-				} catch (SQLException e1) {
-					e1.printStackTrace();
+				if(ccb.getSelectedItem() != null && hccb.getSelectedItem() != null) {
+					try {
+						Main.applet.getSQLHandler().removeHall((Hall) hccb.getSelectedItem());
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+					hccb.setSelectedItem(null);
+				} else {
+					System.out.println("Error: Wrong input");
 				}
-				hccb.setSelectedItem(null);
 			});
 			add(removeButton);
 		}

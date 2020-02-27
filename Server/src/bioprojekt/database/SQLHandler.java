@@ -81,10 +81,15 @@ public class SQLHandler {
 	}
 
 	public void removeAllHallsFromCinema(Cinema c) throws SQLException {
+		Vector<Hall> halls = getHallsFromCinema(c);
+		for (Hall h: halls) {
+			execute("DELETE FROM seat WHERE hall_ID = " + h.id + ";");
+		}
 		execute("DELETE FROM hall WHERE cinema_ID = " + c.id + ";");
 	}
 
 	public void removeHall(Hall h) throws SQLException {
+		execute("DELETE FROM seat WHERE hall_ID = " + h.id + ";");
 		execute("DELETE FROM hall WHERE ID = " + h.id + ";");
 	}
 
@@ -147,24 +152,24 @@ public class SQLHandler {
 
 	public void reserveSeats(Reservation r, int hID, String seats) throws SQLException {
 		Hall h = getHall(hID);
-		
+
 		String[] args = seats.split(",");
 		for(int i = 0; i < args.length*0.5; i++) {
 			execute("INSERT INTO seat VALUES (" + Integer.parseInt(args[(i*2)+1]) + ", " + Integer.parseInt(args[i*2]) + ", " + r.id + ", " + h.id + ");");
 		}
-		
-		
+
+
 	}
 
 	public Vector<Seat> getSeatsFromHall(int hID) throws SQLException {
 		Hall h = getHall(hID);
 		return ResultSetHelper.toSeats(executeQ("SELECT * FROM seat WHERE hall_ID = " + h.id + ""));
 	}
-	
+
 	public void deleteReservation(Reservation r) throws SQLException {
 		Reservation res = getLogin(r);
 		execute("DELETE FROM seat WHERE reservation_ID = " + res.id + ";");
-		
+
 	}
 }
 
