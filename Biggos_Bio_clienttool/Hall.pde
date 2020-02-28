@@ -1,4 +1,4 @@
-class Hall { //<>//
+class Hall { //<>// //<>//
   int ID;
   int cols, rows;
   String movie;

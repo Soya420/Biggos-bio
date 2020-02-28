@@ -18,7 +18,11 @@ public void billetter_dropList_click(GDropList source, GEvent event) { //_CODE_:
 } //_CODE_:billetter_dropList:237351:
 
 public void reserver_button_click(GButton source, GEvent event) { //_CODE_:reserver_button:502515:
-  logind_window.setVisible(true);
+  if (!reserver_label.getText().equals("Ingen film valgt")) {
+    if (!reserver_label.getText().equals("Ingen ledige pladser ved siden af hinanden")) {
+      logind_window.setVisible(true);
+    }
+  }
 } //_CODE_:reserver_button:502515:
 
 public void film_dropList_click(GDropList source, GEvent event) { //_CODE_:film_dropList:361568:
