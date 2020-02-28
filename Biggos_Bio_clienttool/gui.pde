@@ -122,6 +122,9 @@ public void nybruger_final_button_click(GButton source, GEvent event) { //_CODE_
         if (sh.createUser(username, password)) {
 
           nybruger_final_label.setText("");
+          tlf_nybruger_textfield.setText("");
+          adg1_nybruger_textfield.setText("");
+          adg2_nybruger_textfield.setText("");
           nybruger_window.setVisible(false);
         } else {
           nybruger_final_label.setText("Telefonnummer eksisterer allerede");

@@ -1,5 +1,7 @@
 import g4p_controls.*;
 import java.awt.*;
+import java.net.Socket;
+import java.io.*;
 
 Hall currentHall;
 Hall[] allHalls;
@@ -28,7 +30,7 @@ public void draw() {
 void updateGUI() {
   //opdaterer når droplisterne mister fokus istedet for når de bliver klikkede på
   //fordi de ikke kører funktionen hvis man klikker på det allerede valgte element
-  
+
   //biograf droplist
   if (biograf_dropList.hasFocus() && !cinemaUpdated) {
     sh.getData("cinemas");
@@ -57,13 +59,13 @@ void updateGUI() {
     }
     movieUpdated = false;
   }
-  
+
   //billetter droplist
   if (allHalls == null) billetter_dropList.setVisible(false);
   else billetter_dropList.setVisible(true);
-  
+
   if (ticketsUpdated && billetter_dropList.hasFocus()) ticketsUpdated = false;
-  
+
   if (!ticketsUpdated && !billetter_dropList.hasFocus()) {
     sh.getData("seats%"+allHalls[film_dropList.getSelectedIndex()].ID);
     ticketsUpdated = true;
@@ -111,7 +113,7 @@ boolean containsIllegalChar(String s) {
   for (int i = 0; i < s.length(); i++) {
     if (s.charAt(i) == '%' || s.charAt(i) == ',' || s.charAt(i) == '"' || s.charAt(i) == '\\') return true;
   }
-  
+
   return false;
 }
 
