@@ -127,7 +127,7 @@ public class ManageMenu extends JPanel {
 			layout.putConstraint(SpringLayout.EAST, addButton, 100, SpringLayout.WEST, this);
 
 			addButton.addActionListener(e -> {
-				if(!addCinemaField.getText().isBlank()) {
+				if(!addCinemaField.getText().isEmpty()) {
 					try {
 						Main.applet.getSQLHandler().addCinema(new Cinema(addCinemaField.getText()));
 						addCinemaField.setText("");
