@@ -109,7 +109,7 @@ String[] splitString(String[] s) {
 
 boolean containsIllegalChar(String s) {
   for (int i = 0; i < s.length(); i++) {
-    if (s.charAt(i) == '%' || s.charAt(i) == ',' || s.charAt(i) == '"') return true;
+    if (s.charAt(i) == '%' || s.charAt(i) == ',' || s.charAt(i) == '"' || s.charAt(i) == '\\') return true;
   }
   
   return false;
