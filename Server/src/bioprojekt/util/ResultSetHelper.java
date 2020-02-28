@@ -52,38 +52,5 @@ public final class ResultSetHelper {
 		}
 		return seats;
 	}
-
-	public static DefaultTableModel buildTableModel(ResultSet rs) throws SQLException {
-		
-		if(rs == null) {
-			return new DefaultTableModel();
-		}
-		
-		ResultSetMetaData metaData = rs.getMetaData();
-
-		Vector<String> columnNames = new Vector<String>();
-
-		int columnCount = metaData.getColumnCount();
-
-		// sql indexing starts at 1
-		for (int column = 1; column <= columnCount; column++) {
-			System.out.print("hej");
-			columnNames.add(metaData.getColumnLabel(column));
-		}
-
-		Vector<Vector<Object>> data = new Vector<Vector<Object>>();
-
-		// loop until no more rows
-		while (rs.next()) {
-			Vector<Object> vector = new Vector<Object>();
-
-			for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
-				vector.add(rs.getObject(columnIndex));
-			}
-
-			data.add(vector);
-		}
-
-		return new DefaultTableModel(data, columnNames);
-	}
+	
 }
