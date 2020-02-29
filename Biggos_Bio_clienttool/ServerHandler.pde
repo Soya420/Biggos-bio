@@ -15,6 +15,19 @@ class ServerHandler {
     }
   }
 
+  void checkConnection() {
+    try {
+      String message;
+      while ((message = br.readLine()) == null) {
+        //venter på besked
+      }
+      println(message);
+    }
+    catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   void getData(String table) {
     String data = new String("g%");
 
@@ -30,8 +43,6 @@ class ServerHandler {
       while ((message = br.readLine()) == null) {
         //venter på respons
       }
-
-      println(message);
 
       String[] args = message.split("%");
 
@@ -120,7 +131,7 @@ class ServerHandler {
     }
   }
 
-  
+
   //reservation af sæder
   boolean reserve(String username, String password) {
     String login = new String("r%");
@@ -147,12 +158,13 @@ class ServerHandler {
         //venter på respons
       }
 
-      println(message);
-
       String[] args = message.split("%");
 
       if (args[0].equals("reservation")) {
-        if (args[1].equals("Reservation made")) return true;
+        if (args[1].equals("Reservation made")) {
+          println(args[1]);
+          return true;
+        }
       }
     }
     catch (IOException e) {
@@ -160,7 +172,7 @@ class ServerHandler {
     }
     return false;
   }
-    
+
   //afbestilling af sæder
   boolean cancel(String username, String password) {
     String login = new String("u%");
@@ -180,12 +192,13 @@ class ServerHandler {
         //venter på respons
       }
 
-      println(message);
-
       String[] args = message.split("%");
 
       if (args[0].equals("undoReservation")) {
-        if (args[1].equals("Reservation deleted")) return true;
+        if (args[1].equals("Reservation deleted")) {
+          println(args[1]);
+          return true;
+        }
       }
     }
     catch (IOException e) {
@@ -213,12 +226,13 @@ class ServerHandler {
         //venter på respons
       }
 
-      println(message);
-
       String[] args = message.split("%");
 
       if (args[0].equals("createUser")) {
-        if (args[1].equals("User was created")) return true;
+        if (args[1].equals("User was created")) {
+          println(args[1]);
+          return true;
+        }
       }
     }
     catch (IOException e) {

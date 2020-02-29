@@ -16,6 +16,8 @@ public void setup() {
   sh = new ServerHandler();
 
   rectMode(CENTER);
+  
+  sh.checkConnection();
 }
 
 public void draw() {
