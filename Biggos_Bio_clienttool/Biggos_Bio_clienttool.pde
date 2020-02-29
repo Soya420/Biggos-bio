@@ -16,8 +16,8 @@ public void setup() {
   sh = new ServerHandler();
 
   rectMode(CENTER);
-  textAlign(CENTER, TOP);
-  textSize(35);
+  
+  sh.checkConnection();
 }
 
 public void draw() {
@@ -47,7 +47,9 @@ void updateGUI() {
 
       String[] error = {"Ingen valgt biograf"};
       film_dropList.setItems(error, film_dropList.getSelectedIndex());
-    } else sh.getData("halls%"+(allCinemas[biograf_dropList.getSelectedIndex()].ID)+"%"+allCinemas[biograf_dropList.getSelectedIndex()].name);
+    } else {
+      sh.getData("halls%"+(allCinemas[biograf_dropList.getSelectedIndex()].ID)+"%"+allCinemas[biograf_dropList.getSelectedIndex()].name);
+    }
     movieUpdated = true;
 
     //når man har valgt noget fra droplisten
@@ -145,7 +147,6 @@ public void customGUI() {
   logind_window.setVisible(false);
   afbestil_window.setVisible(false);
   nybruger_window.setVisible(false);
-
 
   billetter_dropList.setFont(new Font("Ariel", Font.PLAIN, 18));
   biograf_dropList.setFont(new Font("Ariel", Font.PLAIN, 18));

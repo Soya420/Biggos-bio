@@ -1,4 +1,4 @@
-class Hall { //<>// //<>//
+class Hall { //<>//
   int ID;
   int cols, rows;
   String movie;
@@ -36,6 +36,8 @@ class Hall { //<>// //<>//
     line(1000, 0, 1000, height);
 
     //lærred
+    textAlign(CENTER, TOP);
+    textSize(35);
     strokeWeight(6);
     line(380, 12, 900, 12);
     fill(255);
@@ -48,12 +50,30 @@ class Hall { //<>// //<>//
     } else {
       reserver_label.setText("Ingen ledige pladser ved siden af hinanden");
     }
+
+    //information om sædernes farver
+    textAlign(CENTER, BOTTOM);
+    textSize(15);
+    noStroke();
+
+    fill(0, 0, 255);
+    rect(1060, 60, 20, 20, 2);
+
+    fill(0, 255, 0);
+    rect(1140, 60, 20, 20, 2);
+
+    fill(255);
+    rect(1220, 60, 20, 20, 2);
+
+    text("Reserverede", 1220, 45);
+    text("Ledige", 1140, 45);
+    text("Dit valg", 1060, 45);
   }
 
 
 
   void findEmptySeats() {
-
+    //algoritme til at finde et sæder ved siden af hinanden hvor ingen af dem er reserverede
     boolean occupied = true;
     int x = -1, y = 0;
 
@@ -73,6 +93,7 @@ class Hall { //<>// //<>//
         }
       }
 
+      //hvis bare ét af sæderne i rækken er reserverede, går programmet videre og tjekker for næste
       for (int i = 0; i < billetter_dropList.getSelectedIndex()+1; i++) {
         if (seats[x+i][y].status > 1) {
           occupied = true;
@@ -89,12 +110,15 @@ class Hall { //<>// //<>//
         selected[i] = seats[x+i][y];
       }
     } else {
-      reserver_label.setText("Ingen ledige pladser");
+      reserver_label.setText("Ingen ledige pladser ved siden af hinanden");
     }
   }
 
 
 
+
+  //seperate funktioner for hvordan sæderne skal flytte sig når man bevæger sig med piletasterne
+  //kunne ikke generaliseres til én funktion fordi while- og for-loopenes statements er forskellige hver gang
 
   void right() {
     boolean blocked = true;
