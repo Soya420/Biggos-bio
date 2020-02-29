@@ -83,6 +83,7 @@ class ServerHandler {
           String[] hValues = splitString(halls);
 
           allHalls = new Hall[halls.length];
+          
 
           for (int i = 0; i < hValues.length; i += 2) {
             allHalls[int(i*0.5)] = new Hall(hValues[i], int(hValues[i+1]));
