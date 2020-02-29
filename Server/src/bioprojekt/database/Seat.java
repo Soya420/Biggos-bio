@@ -1,5 +1,6 @@
 package bioprojekt.database;
 
+// Class for seat in the database
 public class Seat {
 	
 	public static final int NO_ID = -1;

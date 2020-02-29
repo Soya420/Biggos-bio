@@ -25,8 +25,11 @@ public class ManageMenu extends JPanel {
 	public ManageMenu() {
 		setPreferredSize(Applet.DEFAULT_PAGE_DIMENSION);
 
+		// Sets the layout to SpringLayout
 		SpringLayout layout = new SpringLayout();
 		setLayout(layout);
+		
+		// Adds all the panels with the appropriate constraints
 
 		AddCinemaPanel addCinemaPanel = new AddCinemaPanel();
 		layout.putConstraint(SpringLayout.NORTH, addCinemaPanel, 5, SpringLayout.NORTH, this);
@@ -57,6 +60,7 @@ public class ManageMenu extends JPanel {
 		add(removeHallPanel);
 	}
 
+	// Creates a combobox which contains all cinemas
 	class CinemaComboBox extends JComboBox<Cinema> {
 
 		public CinemaComboBox() {
@@ -93,13 +97,12 @@ public class ManageMenu extends JPanel {
 
 
 	}
-
-	@SuppressWarnings("serial")
+	
+	// "Add cinema" panel
 	class AddCinemaPanel extends JPanel {
 		private JLabel cinemaName;
 		private JTextField addCinemaField;
 		private JButton addButton;
-
 
 		public AddCinemaPanel() {
 			SpringLayout layout = new SpringLayout();
@@ -144,6 +147,7 @@ public class ManageMenu extends JPanel {
 
 	}
 
+	// "Remove cinema" panel
 	class RemoveCinemaPanel extends JPanel {
 		private JLabel cinemaName;
 		private JButton removeButton;
@@ -194,6 +198,7 @@ public class ManageMenu extends JPanel {
 
 	}
 
+	// "Add hall" panel
 	class AddHallPanel extends JPanel {
 		private JLabel cinemaName, rowsLabel, coloumnsLabel, filmLabel;
 		private JTextField rowsField, coloumnsField, filmField;
@@ -299,10 +304,10 @@ public class ManageMenu extends JPanel {
 			add(addButton);
 		}
 
+		// Checks if a string is an interger
 		public boolean isInteger(String s) {
 			if (s.length() == 0) return false;
 
-			//skal være positiv
 			if (s.charAt(0) == '-') return false;
 
 			try {
@@ -319,6 +324,7 @@ public class ManageMenu extends JPanel {
 
 	}
 
+	// "Remove hall" panel
 	class RemoveHallPanel extends JPanel {
 		private JLabel cinemaName, hallNumber;
 		private CinemaComboBox ccb;
@@ -358,6 +364,7 @@ public class ManageMenu extends JPanel {
 			layout.putConstraint(SpringLayout.WEST, hccb, 5, SpringLayout.WEST, this);
 			layout.putConstraint(SpringLayout.EAST, hccb, 150, SpringLayout.WEST, this);
 
+			// PopupMenuListener changes contents of hall combobox, when closing the cinema combobox, dependent on the selected item
 			ccb.addPopupMenuListener(new PopupMenuListener() {
 
 				@Override
@@ -388,6 +395,7 @@ public class ManageMenu extends JPanel {
 
 			add(hccb);
 			
+			// PopupMenuListener updates itself when it becomes visible, dependent on the selected item of the cinema combobox
 			hccb.addPopupMenuListener(new PopupMenuListener() {
 
 				@Override
@@ -423,7 +431,7 @@ public class ManageMenu extends JPanel {
 			layout.putConstraint(SpringLayout.EAST, removeButton, 100, SpringLayout.WEST, this);
 
 			removeButton.addActionListener(e -> {
-				if(ccb.getSelectedItem() != null && hccb.getSelectedItem() != null) {
+				if(hccb.getSelectedItem() != null) {
 					try {
 						Main.applet.getSQLHandler().removeHall((Hall) hccb.getSelectedItem());
 					} catch (SQLException e1) {

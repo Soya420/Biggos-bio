@@ -29,8 +29,8 @@ public class Applet extends JFrame {
 		
 		sqlh = new SQLHandler();
 		
-		// sets default look and feel for every component to fit OS look and feel.
-		// these exceptions are the only that would be thrown outside the GUI implemented console
+		// Sets default look and feel for every component to fit OS look and feel.
+		// These exceptions are the only that would be thrown outside the GUI implemented console
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
@@ -51,7 +51,7 @@ public class Applet extends JFrame {
 		
 		setContentPane(contentPane);
 		
-		// adds null as text because custom tabs later
+		// Adds null as text because custom tabs later
 		contentPane.addTab(null, new ManageMenu());
 		
 		// Custom tabs
@@ -61,7 +61,7 @@ public class Applet extends JFrame {
 		setVisible(true);
 	}
 	
-	// returns a tab label in default size with provided text
+	// Returns a tab label in default size with provided text
 	public static JComponent getTabLabel(String tabText) {
 		JLabel tabLabel = new JLabel(tabText, SwingConstants.CENTER);
 		tabLabel.setPreferredSize(new Dimension(80, 12));

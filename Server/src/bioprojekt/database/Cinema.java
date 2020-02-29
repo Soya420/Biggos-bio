@@ -1,5 +1,6 @@
 package bioprojekt.database;
 
+// Class for cinema in the database
 public class Cinema {
 	
 	public static final int NO_ID = -1;

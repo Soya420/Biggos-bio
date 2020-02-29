@@ -1,5 +1,6 @@
 package bioprojekt.database;
 
+// Class for hall in the database
 public class Hall {
 	
 public static final int NO_ID = -1;

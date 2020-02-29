@@ -12,6 +12,7 @@ import bioprojekt.database.Hall;
 import bioprojekt.database.Reservation;
 import bioprojekt.database.Seat;
 
+// ResultSetHelper contains functions that help the program read the executed SQL queries, by creating database objects and holding them in Vectors
 public final class ResultSetHelper {
 
 	private ResultSetHelper() {}

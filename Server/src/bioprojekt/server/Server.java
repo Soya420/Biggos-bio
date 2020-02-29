@@ -15,6 +15,7 @@ import bioprojekt.database.Hall;
 import bioprojekt.database.Reservation;
 import bioprojekt.database.Seat;
 
+// The server runs the connection with the clients and handles the messages the clienttool sends
 public class Server implements Runnable, Closeable{
 
 	private boolean stop;
@@ -23,22 +24,18 @@ public class Server implements Runnable, Closeable{
 
 	private List<ClientHandler> clients;
 
+	// Constructor adds the ServerSocket, ArrayList of clients and server thread
 	public Server() throws Exception {
 		serverSocket = new ServerSocket(8777);
 
 		clients = new ArrayList<>();
 
 		new Thread(this, "ServerThread").start();
-
-		/*PrintStream ps = new PrintStream(socket.getOutputStream(), false, Charset.forName("UTF-8"));
-		ps.println("det virker");
-
-		BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		System.out.println(br.readLine());*/
 	}
 
 	@Override
 	public void run() {
+		// Runs until the server stops. Adds clients if they attempt to connect
 		while(!stop) {
 			try {
 				clients.add(new ClientHandler(this, serverSocket.accept(), clients.size()));
@@ -73,20 +70,25 @@ public class Server implements Runnable, Closeable{
 
 	}
 
+	// handleMessage() handles messages sent by the clienttool. Through splitting the string and making switch cases, the message is interpreted and runs the string-associated code
 	public String handleMessage(String input) throws SQLException {
 		String[] args = input.split("%");
 
 		switch(args[0]) {
+		
 		case("g"):
+			
 			switch(args[1]) {
+			// Gets cinemas
 			case("cinemas"):
+				
 				Vector<Cinema> cinemas = Main.applet.getSQLHandler().getAllCinemas();
 			String cResponse = "cinemas%";
 			for(Cinema c: cinemas) {
 				cResponse += c.name + "," + c.id + ";";
 			}
 			return cResponse;
-
+			// Gets halls
 			case("halls"):
 
 				String hResponse = "halls%";
@@ -95,7 +97,7 @@ public class Server implements Runnable, Closeable{
 				hResponse +=  h.movie + "," + h.id + ";";
 			}
 			return hResponse;
-
+			// Gets hall dimensions and reserved seats
 			case("seats"):
 
 				String sResponse = "seats%";
@@ -110,6 +112,7 @@ public class Server implements Runnable, Closeable{
 			
 			return sResponse;
 			}
+		// Reserves seats
 		case("r"):
 
 			String rResponse = "reservation%";
@@ -121,6 +124,7 @@ public class Server implements Runnable, Closeable{
 			rResponse += "Wrong login credentials";
 		}
 		return rResponse;
+		// Creates login
 		case("c"):
 
 			String cResponse = "createUser%";
@@ -132,14 +136,16 @@ public class Server implements Runnable, Closeable{
 		}
 
 		return cResponse;
+		// Deletes reservations
 		case("u"):
 			
 			String uResponse = "undoReservation%Reservation deleted";
 		Main.applet.getSQLHandler().deleteReservation(new Reservation(Integer.parseInt(args[1]), args[2]));
 		
-		
 		return uResponse;
+		
 		}
+		
 		return "";
 	}
 

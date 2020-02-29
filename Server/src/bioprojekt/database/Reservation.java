@@ -1,5 +1,6 @@
 package bioprojekt.database;
 
+// Class for reservation in the database
 public class Reservation {
 	
 	public static final int NO_ID = -1;

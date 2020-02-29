@@ -23,7 +23,8 @@ public class Main {
 
 
 	}
-
+	
+	// Exit closes the program properly, by first closing the server and the SQLHandler before terminating the program
 	public static void exit() {
 		try {
 			server.close();
