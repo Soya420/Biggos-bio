@@ -18,6 +18,13 @@ CONSTRAINT fk_cinema_cinema FOREIGN KEY (cinema_ID) REFERENCES cinema (ID) ON UP
 PRIMARY KEY(ID)
 );
 
+CREATE TABLE reservation(
+ID INT NOT NULL AUTO_INCREMENT,
+phone_number INT NOT NULL,
+pass_word VarChar(31) NOT NULL,
+PRIMARY KEY(ID)
+);
+
 CREATE TABLE seat(
 rows_number INT NOT NULL,
 coloumns_number INT NOT NULL,
@@ -26,13 +33,6 @@ hall_ID INT NOT NULL,
 CONSTRAINT fk_cinema_reservation FOREIGN KEY (reservation_ID) REFERENCES reservation (ID) ON UPDATE CASCADE,
 CONSTRAINT fk_cinema_hall FOREIGN KEY (hall_ID) REFERENCES hall (ID) ON UPDATE CASCADE,
 PRIMARY KEY(rows_number, coloumns_number, hall_ID)
-);
-
-CREATE TABLE reservation(
-ID INT NOT NULL AUTO_INCREMENT,
-phone_number INT NOT NULL,
-pass_word VarChar(31) NOT NULL,
-PRIMARY KEY(ID)
 );
 
 USE cinema;
