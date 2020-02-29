@@ -23,6 +23,7 @@ rows_number INT NOT NULL,
 coloumns_number INT NOT NULL,
 reservation_ID INT NOT NULL,
 hall_ID INT NOT NULL,
+CONSTRAINT fk_cinema_reservation FOREIGN KEY (reservation_ID) REFERENCES reservation (ID) ON UPDATE CASCADE,
 CONSTRAINT fk_cinema_hall FOREIGN KEY (hall_ID) REFERENCES hall (ID) ON UPDATE CASCADE,
 PRIMARY KEY(rows_number, coloumns_number, hall_ID)
 );
