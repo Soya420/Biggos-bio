@@ -43,7 +43,7 @@ synchronized public void win_draw2(PApplet appc, GWinData data) { //_CODE_:afbes
 
 public void afbestil_final_button_click(GButton source, GEvent event) { //_CODE_:afbetil_final_button:901157:
   //når man trykker på afbestil efter at have indtastet sit login
-  if (!containsIllegalChar(adg_afbestil_textfield.getText())) {
+  if (isInteger(adg_afbestil_textfield.getText()) && !containsIllegalChar(adg_afbestil_textfield.getText())) {
     if (sh.cancel(tlf_afbestil_textfield.getText(), adg_afbestil_textfield.getText())) {
       if (!reserver_label.getText().equals("Ingen film valgt")) sh.getData("seats%"+allHalls[film_dropList.getSelectedIndex()].ID);
       afbestil_final_label.setText("");
@@ -81,7 +81,7 @@ public void logind_button_click(GButton source, GEvent event) { //_CODE_:logind_
   //når man trykker reserver sæder efter at have indtastet sit login
   if (!reserver_label.getText().equals("Ingen film valgt")) {
     if (!reserver_label.getText().equals("Ingen ledige pladser ved siden af hinanden")) {
-      if (!containsIllegalChar(tlf_logind_textfield.getText())) {
+      if (isInteger(tlf_logind_textfield.getText()) && !containsIllegalChar(tlf_logind_textfield.getText())) {
         if (sh.reserve(tlf_logind_textfield.getText(), adg_logind_textfield.getText())) {
 
           sh.getData("seats%"+allHalls[film_dropList.getSelectedIndex()].ID);
