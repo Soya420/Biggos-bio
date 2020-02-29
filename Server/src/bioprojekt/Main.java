@@ -2,12 +2,7 @@ package bioprojekt;
 import java.io.IOException;
 
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
-import bioprojekt.database.Cinema;
-import bioprojekt.database.Hall;
-import bioprojekt.database.SQLHandler;
 import bioprojekt.server.Server;
 import bioprojekt.ui.Applet;
 
