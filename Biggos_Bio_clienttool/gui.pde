@@ -43,7 +43,7 @@ synchronized public void win_draw2(PApplet appc, GWinData data) { //_CODE_:afbes
 
 public void afbestil_final_button_click(GButton source, GEvent event) { //_CODE_:afbetil_final_button:901157:
   //når man trykker på afbestil efter at have indtastet sit login
-  if (isInteger(adg_afbestil_textfield.getText()) && !containsIllegalChar(adg_afbestil_textfield.getText())) {
+  if (isInteger(tlf_afbestil_textfield.getText()) && !containsIllegalChar(adg_afbestil_textfield.getText())) {
     if (sh.cancel(tlf_afbestil_textfield.getText(), adg_afbestil_textfield.getText())) {
       if (!reserver_label.getText().equals("Ingen film valgt")) sh.getData("seats%"+allHalls[film_dropList.getSelectedIndex()].ID);
       afbestil_final_label.setText("");
@@ -163,7 +163,7 @@ public void createGUI(){
   reserver_button.setText("Reserver");
   reserver_button.setLocalColorScheme(GCScheme.SCHEME_8);
   reserver_button.addEventHandler(this, "reserver_button_click");
-  film_dropList = new GDropList(this, 40, 120, 190, 200, 3, 30);
+  film_dropList = new GDropList(this, 40, 120, 190, 550, 10, 30);
   film_dropList.setItems(loadStrings("list_361568"), 0);
   film_dropList.setLocalColorScheme(GCScheme.SCHEME_9);
   film_dropList.addEventHandler(this, "film_dropList_click");
@@ -181,7 +181,7 @@ public void createGUI(){
   reserver_label.setText("Ingen film valgt");
   reserver_label.setLocalColorScheme(GCScheme.SCHEME_10);
   reserver_label.setOpaque(false);
-  biograf_dropList = new GDropList(this, 40, 10, 190, 200, 3, 30);
+  biograf_dropList = new GDropList(this, 40, 10, 190, 550, 10, 30);
   biograf_dropList.setItems(loadStrings("list_871773"), 0);
   biograf_dropList.setLocalColorScheme(GCScheme.SCHEME_9);
   biograf_dropList.addEventHandler(this, "biograf_dropList_click");

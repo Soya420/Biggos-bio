@@ -30,7 +30,7 @@ public class SQLHandler {
 
 	public SQLHandler(){
 		try {
-			
+
 			// Connection to the database
 			Class.forName("com.mysql.jdbc.Driver");
 			SQLLogin login = new SQLLogin();
@@ -78,12 +78,14 @@ public class SQLHandler {
 
 	// Adds a cinema to the database
 	public void addCinema(Cinema c) throws SQLException {
-		synchronized(addCinema) {
-			String search = c.name;
+		if (!containsIllegalChar(c.name)) {
+			synchronized(addCinema) {
+				String search = c.name;
 
-			addCinema.setString(1, search);
-			addCinema.execute();
-		}
+				addCinema.setString(1, search);
+				addCinema.execute();
+			}
+		} else System.out.println("Error: Illegal char");
 	}
 
 	// Removes a cinema from the database
@@ -118,19 +120,21 @@ public class SQLHandler {
 
 	// Creates a hall in the database
 	public void addHall(Hall h) throws SQLException {
-		synchronized(addHall) {
-			String movie = h.movie;
-			int rows = h.rows;
-			int coloumns = h.coloumns;
-			int cID = h.cinemaID;
+		if (!containsIllegalChar(h.movie)) {
+			synchronized(addHall) {
+				String movie = h.movie;
+				int rows = h.rows;
+				int coloumns = h.coloumns;
+				int cID = h.cinemaID;
 
 
-			addHall.setInt(1, rows);
-			addHall.setInt(2, coloumns);
-			addHall.setInt(3, cID);
-			addHall.setString(4, movie);
-			addHall.execute();
-		}
+				addHall.setInt(1, rows);
+				addHall.setInt(2, coloumns);
+				addHall.setInt(3, cID);
+				addHall.setString(4, movie);
+				addHall.execute();
+			}
+		} else System.out.println("Error: Illegal char");
 	}
 
 	// Creates a reservation ID/login in the database
@@ -189,6 +193,13 @@ public class SQLHandler {
 		Reservation res = getLogin(r);
 		execute("DELETE FROM seat WHERE reservation_ID = " + res.id + ";");
 
+	}
+
+	public boolean containsIllegalChar(String s) {
+		for (int i = 0; i < s.length(); i++) {
+			if (s.charAt(i) == '%' || s.charAt(i) == ',') return true;
+		}
+		return false;
 	}
 }
 
