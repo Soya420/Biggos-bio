@@ -5,7 +5,6 @@ class ServerHandler {
 
   ServerHandler() {
     try {
-      //socket = new Socket("192.168.43.71", 8777);
       socket = new Socket("127.0.0.1", 8777);
       ps = new PrintStream(socket.getOutputStream());
       br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
